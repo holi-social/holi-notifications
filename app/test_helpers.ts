@@ -64,3 +64,25 @@ export const stubNovuWorkflowPreferences = (
         : Promise.resolve({ data: { data: response } }),
     ]),
   );
+
+export const stubNovuUpdateGlobalPreferences = (error?: Error) =>
+  stub(
+    novu.subscribers,
+    "updateGlobalPreference",
+    // @ts-ignore: Full mock of AxiosResponse not necessary
+    returnsNext([
+      error ? Promise.reject(error) : Promise.resolve(),
+    ]),
+  );
+
+export const stubNovuUpdateWorkflowPreferences = (error?: Error) =>
+  stub(
+    novu.subscribers,
+    "updatePreference",
+    returnsNext(
+      (error ? [Promise.reject(error)] : []).concat(
+        // @ts-ignore: Full mock of AxiosResponse not necessary
+        testWorkflowPreferences.map(() => Promise.resolve()),
+      ),
+    ),
+  );

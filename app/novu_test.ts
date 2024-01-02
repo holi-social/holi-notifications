@@ -3,26 +3,32 @@ import {
   assertEquals,
   assertRejects,
   assertSpyCall,
-  beforeEach,
+  assertSpyCalls,
   describe,
   it,
   Stub,
 } from "./dev_deps.ts";
-import { GraphQLError } from "./deps.ts";
+import { ChannelTypeEnum, GraphQLError } from "./deps.ts";
 
-import { fetchPreferences } from "./novu.ts";
+import { fetchPreferences, updatePreferences } from "./novu.ts";
 import {
   stubNovuGlobalPreferences,
+  stubNovuUpdateGlobalPreferences,
+  stubNovuUpdateWorkflowPreferences,
   stubNovuWorkflowPreferences,
 } from "./test_helpers.ts";
-import { novu, preferencesAllEnabled, subscriberId } from "./test_data.ts";
+import {
+  globalUpdate,
+  novu,
+  preferencesAllEnabled,
+  subscriberId,
+} from "./test_data.ts";
 
 describe("novu", () => {
   let novuGlobalPreferenceStub: Stub;
   let novuPreferenceStub: Stub;
-
-  beforeEach(() => {
-  });
+  let novuUpdateGlobalPreferenceStub: Stub;
+  let novuUpdatePreferenceStub: Stub;
 
   afterEach(() => {
     if (!novuGlobalPreferenceStub?.restored) {
@@ -30,6 +36,12 @@ describe("novu", () => {
     }
     if (!novuPreferenceStub?.restored) {
       novuPreferenceStub?.restore();
+    }
+    if (!novuUpdateGlobalPreferenceStub?.restored) {
+      novuUpdateGlobalPreferenceStub?.restore();
+    }
+    if (!novuUpdatePreferenceStub?.restored) {
+      novuUpdatePreferenceStub?.restore();
     }
   });
 
@@ -141,5 +153,253 @@ describe("novu", () => {
       );
     });
   });
-  // TODO(SF) add tests for update
+
+  describe("updating preferences", () => {
+    it("fetches global and workflow preferences for subscriber", async () => {
+      novuGlobalPreferenceStub = stubNovuGlobalPreferences();
+      novuPreferenceStub = stubNovuWorkflowPreferences();
+      novuUpdateGlobalPreferenceStub = stubNovuUpdateGlobalPreferences();
+      novuUpdatePreferenceStub = stubNovuUpdateWorkflowPreferences();
+
+      await updatePreferences(novu, subscriberId, globalUpdate);
+
+      assertSpyCall(novuGlobalPreferenceStub, 0, {
+        self: novu.subscribers,
+        args: [subscriberId],
+      });
+      assertSpyCall(novuPreferenceStub, 0, {
+        self: novu.subscribers,
+        args: [subscriberId],
+      });
+    });
+
+    it("throws unauthorized error for missing subscriber id", async () => {
+      await assertRejects(
+        () => updatePreferences(novu, undefined, globalUpdate),
+        GraphQLError,
+        "Unauthorized",
+      );
+    });
+
+    it("throws unauthorized error for empty subscriber id", async () => {
+      await assertRejects(
+        () => updatePreferences(novu, "", globalUpdate),
+        GraphQLError,
+        "Unauthorized",
+      );
+    });
+
+    it("throws error if fetching global preferences fails", async () => {
+      novuGlobalPreferenceStub = stubNovuGlobalPreferences(new Error("Test"));
+      novuPreferenceStub = stubNovuWorkflowPreferences();
+      novuUpdateGlobalPreferenceStub = stubNovuUpdateGlobalPreferences();
+      novuUpdatePreferenceStub = stubNovuUpdateWorkflowPreferences();
+
+      await assertRejects(
+        () => updatePreferences(novu, subscriberId, globalUpdate),
+        Error,
+        "Test",
+      );
+    });
+
+    it("throws error if fetching workflow preferences fails", async () => {
+      novuGlobalPreferenceStub = stubNovuGlobalPreferences();
+      novuPreferenceStub = stubNovuWorkflowPreferences(new Error("Test"));
+      novuUpdateGlobalPreferenceStub = stubNovuUpdateGlobalPreferences();
+      novuUpdatePreferenceStub = stubNovuUpdateWorkflowPreferences();
+
+      await assertRejects(
+        () => updatePreferences(novu, subscriberId, globalUpdate),
+        Error,
+        "Test",
+      );
+    });
+
+    it("throws error if global preferences are invalid", async () => {
+      novuGlobalPreferenceStub = stubNovuGlobalPreferences([]);
+      novuPreferenceStub = stubNovuWorkflowPreferences();
+      novuUpdateGlobalPreferenceStub = stubNovuUpdateGlobalPreferences();
+      novuUpdatePreferenceStub = stubNovuUpdateWorkflowPreferences();
+
+      await assertRejects(
+        () => updatePreferences(novu, subscriberId, globalUpdate),
+        Error,
+        "Cannot read properties of undefined",
+      );
+    });
+
+    it("throws error if updating global preferences fails", async () => {
+      novuGlobalPreferenceStub = stubNovuGlobalPreferences();
+      novuPreferenceStub = stubNovuWorkflowPreferences();
+      novuUpdateGlobalPreferenceStub = stubNovuUpdateGlobalPreferences(
+        new Error("Test"),
+      );
+      novuUpdatePreferenceStub = stubNovuUpdateWorkflowPreferences();
+
+      await assertRejects(
+        () => updatePreferences(novu, subscriberId, globalUpdate),
+        Error,
+        "Test",
+      );
+    });
+
+    it("throws error if updating workflow preferences fails", async () => {
+      novuGlobalPreferenceStub = stubNovuGlobalPreferences();
+      novuPreferenceStub = stubNovuWorkflowPreferences();
+      novuUpdateGlobalPreferenceStub = stubNovuUpdateGlobalPreferences();
+      novuUpdatePreferenceStub = stubNovuUpdateWorkflowPreferences(
+        new Error("Test"),
+      );
+
+      await assertRejects(
+        () => updatePreferences(novu, subscriberId, globalUpdate),
+        Error,
+        "Test",
+      );
+    });
+
+    it("applies global update globally and to every workflow", async () => {
+      novuGlobalPreferenceStub = stubNovuGlobalPreferences();
+      novuPreferenceStub = stubNovuWorkflowPreferences();
+      novuUpdateGlobalPreferenceStub = stubNovuUpdateGlobalPreferences();
+      novuUpdatePreferenceStub = stubNovuUpdateWorkflowPreferences();
+
+      await updatePreferences(novu, subscriberId, globalUpdate);
+
+      assertSpyCall(novuUpdateGlobalPreferenceStub, 0, {
+        self: novu.subscribers,
+        args: [subscriberId, {
+          preferences: [{ enabled: false, type: "push" }],
+        }],
+      });
+      assertSpyCalls(novuUpdatePreferenceStub, 2);
+      assertSpyCall(novuUpdatePreferenceStub, 0, {
+        self: novu.subscribers,
+        args: [subscriberId, "space-membership-request-accept", {
+          channel: { enabled: false, type: "push" },
+        }],
+      });
+      assertSpyCall(novuUpdatePreferenceStub, 1, {
+        self: novu.subscribers,
+        args: [subscriberId, "space-membership-request-decline", {
+          channel: { enabled: false, type: "push" },
+        }],
+      });
+    });
+
+    it("only applies updates to workflows if channel is supported", async () => {
+      novuGlobalPreferenceStub = stubNovuGlobalPreferences();
+      novuPreferenceStub = stubNovuWorkflowPreferences();
+      novuUpdateGlobalPreferenceStub = stubNovuUpdateGlobalPreferences();
+      novuUpdatePreferenceStub = stubNovuUpdateWorkflowPreferences();
+
+      await updatePreferences(novu, subscriberId, {
+        ...globalUpdate,
+        channel: ChannelTypeEnum.EMAIL,
+      });
+
+      assertSpyCalls(novuUpdatePreferenceStub, 1);
+      assertSpyCall(novuUpdatePreferenceStub, 0, {
+        self: novu.subscribers,
+        args: [subscriberId, "space-membership-request-accept", {
+          channel: { enabled: false, type: "email" },
+        }],
+      });
+    });
+
+    it("only applies updates to workflows if preference is changed", async () => {
+      novuGlobalPreferenceStub = stubNovuGlobalPreferences();
+      novuPreferenceStub = stubNovuWorkflowPreferences();
+      novuUpdateGlobalPreferenceStub = stubNovuUpdateGlobalPreferences();
+      novuUpdatePreferenceStub = stubNovuUpdateWorkflowPreferences();
+
+      await updatePreferences(novu, subscriberId, {
+        ...globalUpdate,
+        enabled: true,
+      });
+
+      assertSpyCalls(novuUpdateGlobalPreferenceStub, 0);
+      assertSpyCalls(novuUpdatePreferenceStub, 1);
+      assertSpyCall(novuUpdatePreferenceStub, 0, {
+        self: novu.subscribers,
+        args: [subscriberId, "space-new-post", {
+          channel: { enabled: true, type: "push" },
+        }],
+      });
+    });
+
+    it("applies workflow specific update", async () => {
+      novuGlobalPreferenceStub = stubNovuGlobalPreferences();
+      novuPreferenceStub = stubNovuWorkflowPreferences();
+      novuUpdateGlobalPreferenceStub = stubNovuUpdateGlobalPreferences();
+      novuUpdatePreferenceStub = stubNovuUpdateWorkflowPreferences();
+
+      await updatePreferences(novu, subscriberId, {
+        ...globalUpdate,
+        id: "SPACE_MEMBERSHIP_REQUEST",
+      });
+
+      assertSpyCalls(novuUpdateGlobalPreferenceStub, 0);
+      assertSpyCalls(novuUpdatePreferenceStub, 2);
+      assertSpyCall(novuUpdatePreferenceStub, 0, {
+        self: novu.subscribers,
+        args: [subscriberId, "space-membership-request-accept", {
+          channel: { enabled: false, type: "push" },
+        }],
+      });
+      assertSpyCall(novuUpdatePreferenceStub, 1, {
+        self: novu.subscribers,
+        args: [subscriberId, "space-membership-request-decline", {
+          channel: { enabled: false, type: "push" },
+        }],
+      });
+    });
+
+    it("returns aggregation of updated preferences", async () => {
+      const expectedPreferences = [
+        {
+          id: "GLOBAL",
+          category: "GLOBAL",
+          preferences: { push: false, email: true },
+        },
+        {
+          id: "SPACE_NEW_POST",
+          category: "SPACES",
+          preferences: { push: false, email: undefined },
+        },
+        {
+          id: "SPACE_MEMBERSHIP_REQUEST",
+          category: "SPACES",
+          preferences: { push: false, email: true },
+        },
+      ];
+      novuGlobalPreferenceStub = stubNovuGlobalPreferences();
+      novuPreferenceStub = stubNovuWorkflowPreferences();
+      novuUpdateGlobalPreferenceStub = stubNovuUpdateGlobalPreferences();
+      novuUpdatePreferenceStub = stubNovuUpdateWorkflowPreferences();
+
+      const result = await updatePreferences(novu, subscriberId, globalUpdate);
+
+      assertEquals(result, expectedPreferences);
+    });
+
+    it("handles empty list of workflow templates", async () => {
+      const expectedPreferences = [
+        {
+          id: "GLOBAL",
+          category: "GLOBAL",
+          preferences: { push: false, email: true },
+        },
+      ];
+      novuGlobalPreferenceStub = stubNovuGlobalPreferences();
+      novuPreferenceStub = stubNovuWorkflowPreferences([]);
+      novuUpdateGlobalPreferenceStub = stubNovuUpdateGlobalPreferences();
+      novuUpdatePreferenceStub = stubNovuUpdateWorkflowPreferences();
+
+      const result = await updatePreferences(novu, subscriberId, globalUpdate);
+
+      assertEquals(result, expectedPreferences);
+      assertSpyCalls(novuUpdatePreferenceStub, 0);
+    });
+  });
 });

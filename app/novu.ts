@@ -155,7 +155,7 @@ const applyUpdate = async (
   workflowPreferences: WorkflowTemplatePreferences,
   input: UpdatePreferencesInput,
 ): Promise<WorkflowTemplatePreferences> => {
-  // Leave preferences unchanged if not matching or not global change
+  // Leave preferences unchanged if not matching and not global change
   if (!([CATEGORY_GLOBAL, workflowPreferences.id].includes(input.id))) {
     return workflowPreferences;
   }
@@ -210,20 +210,12 @@ export const updatePreferences = async (
     fetchWorkflowTemplatePreferences(novu, subscriberId),
   ]);
 
-  // TODO(SF) apply in parallel, possible combine in single list already
-  const updatedGlobalPreferences = await applyUpdate(
-    novu,
-    subscriberId,
-    globalPreferences,
-    input,
-  );
-  const updatedWorkflowPreferences = await Promise.all(
-    templatePreferences.map((workflowTemplate) =>
-      applyUpdate(novu, subscriberId, workflowTemplate, input)
-    ),
+  const updatedPreferences = await Promise.all(
+    [globalPreferences].concat(templatePreferences)
+      .map((preferences) =>
+        applyUpdate(novu, subscriberId, preferences, input)
+      ),
   );
 
-  return aggregateGroupedWorkflowPreferences(
-    [updatedGlobalPreferences].concat(updatedWorkflowPreferences),
-  );
+  return aggregateGroupedWorkflowPreferences(updatedPreferences);
 };

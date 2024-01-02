@@ -14,8 +14,9 @@ import {
   GraphQLServer,
   HEADER_USER_ID,
 } from "./server.ts";
-import { PreferencesResponse } from "./types.ts";
+import { PreferencesResponse, UpdatePreferencesInput } from "./types.ts";
 import {
+  globalUpdate,
   novu,
   preferencesAllEnabled,
   subscriberId,
@@ -24,6 +25,8 @@ import {
 import {
   processGqlRequest,
   stubNovuGlobalPreferences,
+  stubNovuUpdateGlobalPreferences,
+  stubNovuUpdateWorkflowPreferences,
   stubNovuWorkflowPreferences,
 } from "./test_helpers.ts";
 
@@ -36,7 +39,7 @@ const queryPreferences = (
   headers: Record<string, unknown> = authorizedHeader,
 ): Promise<PreferencesResponse | GraphQLError> => {
   const query = `
-  query Projects {
+  query Preferences {
     preferences {
       id
       category
@@ -51,25 +54,56 @@ const queryPreferences = (
   );
 };
 
+const mutatePreferences = (
+  graphQLServer: GraphQLServer,
+  input: UpdatePreferencesInput,
+  headers: Record<string, unknown> = authorizedHeader,
+): Promise<PreferencesResponse | GraphQLError> => {
+  const query = `
+  mutation UpdatePreferences($input: UpdatePreferencesInput!) {
+    updatePreferences(input: $input) {
+      id
+      category
+      preferences {
+        push
+        email
+      }
+    }
+  }`;
+  return processGqlRequest(graphQLServer, query, { input }, headers).then(
+    (result) => result?.updatePreferences as PreferencesResponse,
+  );
+};
+
 describe("server", () => {
+  let novuGlobalPreferenceStub: Stub;
+  let novuPreferenceStub: Stub;
+  let novuUpdateGlobalPreferenceStub: Stub;
+  let novuUpdatePreferenceStub: Stub;
+
+  beforeEach(() => {
+    novuGlobalPreferenceStub = stubNovuGlobalPreferences();
+    novuPreferenceStub = stubNovuWorkflowPreferences();
+    novuUpdateGlobalPreferenceStub = stubNovuUpdateGlobalPreferences();
+    novuUpdatePreferenceStub = stubNovuUpdateWorkflowPreferences();
+  });
+
+  afterEach(() => {
+    if (!novuGlobalPreferenceStub?.restored) {
+      novuGlobalPreferenceStub?.restore();
+    }
+    if (!novuPreferenceStub?.restored) {
+      novuPreferenceStub?.restore();
+    }
+    if (!novuUpdateGlobalPreferenceStub?.restored) {
+      novuUpdateGlobalPreferenceStub?.restore();
+    }
+    if (!novuUpdatePreferenceStub?.restored) {
+      novuUpdatePreferenceStub?.restore();
+    }
+  });
+
   describe("preferences", () => {
-    let novuGlobalPreferenceStub: Stub;
-    let novuPreferenceStub: Stub;
-
-    beforeEach(() => {
-      novuGlobalPreferenceStub = stubNovuGlobalPreferences();
-      novuPreferenceStub = stubNovuWorkflowPreferences();
-    });
-
-    afterEach(() => {
-      if (!novuGlobalPreferenceStub?.restored) {
-        novuGlobalPreferenceStub?.restore();
-      }
-      if (!novuPreferenceStub?.restored) {
-        novuPreferenceStub?.restore();
-      }
-    });
-
     it("returns aggregated response", async () => {
       const expectedPreferences = [
         {
@@ -120,5 +154,76 @@ describe("server", () => {
       assertSpyCalls(novuPreferenceStub, 0);
     });
   });
-  // TODO(SF) add tests for update
+
+  describe("updatePreferences", () => {
+    it("returns aggregated response", async () => {
+      const expectedPreferences = [
+        {
+          id: "GLOBAL",
+          category: "GLOBAL",
+          preferences: { push: false, email: true },
+        },
+        {
+          id: "SPACE_NEW_POST",
+          category: "SPACES",
+          preferences: { push: false, email: null },
+        },
+        {
+          id: "SPACE_MEMBERSHIP_REQUEST",
+          category: "SPACES",
+          preferences: { push: false, email: true },
+        },
+      ];
+      const graphQLServer = createGraphQLServer(novu, testConfig);
+
+      const result = await mutatePreferences(graphQLServer, globalUpdate);
+
+      assertEquals(result, expectedPreferences);
+    });
+
+    it("correctly retrieves user id from header", async () => {
+      const graphQLServer = createGraphQLServer(novu, testConfig);
+
+      await mutatePreferences(graphQLServer, globalUpdate);
+
+      assertSpyCall(novuGlobalPreferenceStub, 0, {
+        self: novu.subscribers,
+        args: [subscriberId],
+      });
+      assertSpyCall(novuPreferenceStub, 0, {
+        self: novu.subscribers,
+        args: [subscriberId],
+      });
+      assertSpyCall(novuUpdateGlobalPreferenceStub, 0, {
+        self: novu.subscribers,
+        args: [subscriberId, {
+          preferences: [{ enabled: false, type: "push" }],
+        }],
+      });
+      assertSpyCall(novuUpdatePreferenceStub, 0, {
+        self: novu.subscribers,
+        args: [subscriberId, "space-membership-request-accept", {
+          channel: { enabled: false, type: "push" },
+        }],
+      });
+      assertSpyCall(novuUpdatePreferenceStub, 1, {
+        self: novu.subscribers,
+        args: [subscriberId, "space-membership-request-decline", {
+          channel: { enabled: false, type: "push" },
+        }],
+      });
+    });
+
+    it("does not update preferences if subscriber id is missing", async () => {
+      const graphQLServer = createGraphQLServer(novu, testConfig);
+
+      const result = await mutatePreferences(graphQLServer, globalUpdate, {});
+
+      assertEquals(result, undefined);
+      assertSpyCalls(novuGlobalPreferenceStub, 0);
+      assertSpyCalls(novuPreferenceStub, 0);
+      assertSpyCalls(novuUpdateGlobalPreferenceStub, 0);
+      assertSpyCalls(novuUpdatePreferenceStub, 0);
+    });
+  });
 });

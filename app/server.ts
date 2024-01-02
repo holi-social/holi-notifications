@@ -104,7 +104,6 @@ export const createGraphQLServer = (
 ): GraphQLServer => {
   const plugins = [
     useResponseCache({
-      // TODO(SF) test if this works properly
       // cache by user id
       session: (request: Request) => request.headers.get(HEADER_USER_ID),
     }),

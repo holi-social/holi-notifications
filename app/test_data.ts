@@ -1,4 +1,4 @@
-import { Novu } from "./deps.ts";
+import { ChannelTypeEnum, Novu } from "./deps.ts";
 
 export const testConfig = {
   port: 8005,
@@ -59,4 +59,9 @@ export const testWorkflowPreferences = [
 export const preferencesAllEnabled = {
   "push": true,
   "email": true,
+};
+export const globalUpdate = {
+  id: "GLOBAL",
+  channel: ChannelTypeEnum.PUSH,
+  enabled: false,
 };
