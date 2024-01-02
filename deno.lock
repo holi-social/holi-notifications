@@ -9,8 +9,8 @@
       "npm:lodash.partition@4.6.0": "npm:lodash.partition@4.6.0"
     },
     "npm": {
-      "@babel/runtime@7.23.6": {
-        "integrity": "sha512-zHd0eUrf5GZoOWVCXp6koAKQTfZV07eit6bGPmJgnZdnSAvvZee6zniW2XMF7Cmc4ISOOnPy3QaSiIJGJkVEDQ==",
+      "@babel/runtime@7.23.7": {
+        "integrity": "sha512-w06OXVOFso7LcbzMiDGt+3X7Rh7Ho8MmgPoWU3rarH+8upf+wSU/grlGbWzQyr3DkdN6ZeuMFjpdwW0Q+HxobA==",
         "dependencies": {
           "regenerator-runtime": "regenerator-runtime@0.14.1"
         }
@@ -29,7 +29,7 @@
       "@novu/shared@0.22.0": {
         "integrity": "sha512-lqP3idO1jkyXZbQR7TuPs2KpRdOJ7YUyJCiaItuiLHe0uO6iCWj3TwWAPalMJmxd05YZfXsyvaqPWYPHzy42qw==",
         "dependencies": {
-          "axios": "axios@1.6.2",
+          "axios": "axios@1.6.3",
           "class-transformer": "class-transformer@0.5.1",
           "class-validator": "class-validator@0.14.0"
         }
@@ -61,14 +61,14 @@
       "axios-retry@3.9.1": {
         "integrity": "sha512-8PJDLJv7qTTMMwdnbMvrLYuvB47M81wRtxQmEdV5w4rgbTXTt+vtPkXwajOfOdSyv/wZICJOC+/UhXH4aQ/R+w==",
         "dependencies": {
-          "@babel/runtime": "@babel/runtime@7.23.6",
+          "@babel/runtime": "@babel/runtime@7.23.7",
           "is-retry-allowed": "is-retry-allowed@2.2.0"
         }
       },
-      "axios@1.6.2": {
-        "integrity": "sha512-7i24Ri4pmDRfJTR7LDBhsOTtcm+9kjX5WiY1X3wIisx6G9So3pfMkEiU7emUBe46oceVImccTEM3k6C5dbVW8A==",
+      "axios@1.6.3": {
+        "integrity": "sha512-fWyNdeawGam70jXSVlKl+SUNVcL6j6W79CuSIPfi6HnDUmSCH6gyUys/HrqHeA/wU0Az41rRgean494d0Jb+ww==",
         "dependencies": {
-          "follow-redirects": "follow-redirects@1.15.3",
+          "follow-redirects": "follow-redirects@1.15.4",
           "form-data": "form-data@4.0.0",
           "proxy-from-env": "proxy-from-env@1.1.0"
         }
@@ -81,7 +81,7 @@
         "integrity": "sha512-ct3ltplN8I9fOwUd8GrP8UQixwff129BkEtuWDKL5W45cQuLd19xqmTLu5ge78YDm/fdje6FMt0hGOhl0lii3A==",
         "dependencies": {
           "@types/validator": "@types/validator@13.11.7",
-          "libphonenumber-js": "libphonenumber-js@1.10.52",
+          "libphonenumber-js": "libphonenumber-js@1.10.53",
           "validator": "validator@13.11.0"
         }
       },
@@ -95,8 +95,8 @@
         "integrity": "sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==",
         "dependencies": {}
       },
-      "follow-redirects@1.15.3": {
-        "integrity": "sha512-1VzOtuEM8pC9SFU1E+8KfTjZyMztRsgEfwQl44z8A25uy13jSzTj6dyK2Df52iV0vgHCfBwLhDWevLn95w5v6Q==",
+      "follow-redirects@1.15.4": {
+        "integrity": "sha512-Cr4D/5wlrb0z9dgERpUL3LrmPKVDsETIJhaCMeDfuFYcqa5bldGV6wBsAN6X/vxlXQtFBMrXdXxdL8CbDTGniw==",
         "dependencies": {}
       },
       "form-data@4.0.0": {
@@ -121,8 +121,8 @@
         "integrity": "sha512-XVm7LOeLpTW4jV19QSH38vkswxoLud8sQ57YwJVTPWdiaI9I8keEhGFpBlslyVsgdQy4Opg8QOLb8YRgsyZiQg==",
         "dependencies": {}
       },
-      "libphonenumber-js@1.10.52": {
-        "integrity": "sha512-6vCuCHgem+OW1/VCAKgkasfegItCea8zIT7s9/CG/QxdCMIM7GfzbEBG5d7lGO3rzipjt5woOQL3DiHa8Fy78Q==",
+      "libphonenumber-js@1.10.53": {
+        "integrity": "sha512-sDTnnqlWK4vH4AlDQuswz3n4Hx7bIQWTpIcScJX+Sp7St3LXHmfiax/ZFfyYxHmkdCvydOLSuvtAO/XpXiSySw==",
         "dependencies": {}
       },
       "lodash.get@4.4.2": {

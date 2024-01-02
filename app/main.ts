@@ -24,12 +24,21 @@ const requiredEnv = <T>(
 const asBoolean = (str: string) => /^true$/i.test(str);
 
 const serverConfigFromEnv = () => {
+  const fake = requiredEnv("FAKE", asBoolean, false); // For local development. If set, the API returns dummy data
   return {
     port: requiredEnv("PORT", Number, DEFAULT_PORT),
-    fake: requiredEnv("FAKE", asBoolean, false), // For local development. If set, the API returns dummy data
+    fake,
     novuConfig: {
-      apiKey: requiredEnv("NOVU_API_KEY", String),
-      apiUrl: requiredEnv("NOVU_API_URL", String),
+      apiKey: requiredEnv(
+        "NOVU_API_KEY",
+        String,
+        fake ? "dummy value" : undefined,
+      ),
+      apiUrl: requiredEnv(
+        "NOVU_API_URL",
+        String,
+        fake ? "dummy value" : undefined,
+      ),
     },
   };
 };

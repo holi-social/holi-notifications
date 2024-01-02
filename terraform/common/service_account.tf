@@ -1,6 +1,6 @@
 resource "google_service_account" "notifications_api" {
   project      = data.terraform_remote_state.holi_infra_state.outputs.shared_project_id
-  account_id   = "cloudrun-service-notifications-api"
+  account_id   = "cloudrun-service-notifications"
   display_name = "Notifications API service account for Cloud Run"
 }
 

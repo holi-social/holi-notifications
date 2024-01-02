@@ -1,4 +1,4 @@
-FROM denoland/deno:alpine-1.36.1
+FROM denoland/deno:alpine-1.39.1
 
 # The port that your application listens to.
 EXPOSE 8005
@@ -10,7 +10,7 @@ COPY deno.lock .
 COPY deno.json .
 COPY ./app ./app
 
-RUN deno cache --lock=deno.lock app/deps.ts
+RUN deno cache app/deps.ts
 RUN deno cache app/main.ts
 
-CMD ["deno", "run", "--allow-net", "--allow-env", "--lock=deno.lock", "--cached-only", "app/main.ts"]
+CMD ["deno", "run", "--allow-net", "--allow-env", "--allow-read", "--lock=deno.lock", "--cached-only", "app/main.ts"]
