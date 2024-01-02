@@ -84,7 +84,7 @@ const transformChannelPreferences = (
 const transformWorkflowPreferences = (
   workflow: NovuWorkflowPreferences,
 ): WorkflowTemplatePreferences => {
-  const [[category], [id]] = partition(
+  const [[category = ""], [id = ""]] = partition(
     workflow.template.tags,
     (tag) => tag.startsWith(CATEGORY_PREFIX),
   );

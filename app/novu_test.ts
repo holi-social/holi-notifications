@@ -152,6 +152,44 @@ describe("novu", () => {
         "Cannot read properties of undefined",
       );
     });
+
+    it("handles workflow templates without tags", async () => {
+      const expectedPreferences = [
+        {
+          id: "GLOBAL",
+          category: "GLOBAL",
+          preferences: { push: true, email: true },
+        },
+        {
+          id: "",
+          category: "",
+          preferences: { push: false, email: undefined },
+        },
+      ];
+      novuGlobalPreferenceStub = stubNovuGlobalPreferences();
+      novuPreferenceStub = stubNovuWorkflowPreferences([
+        {
+          preference: {
+            enabled: true,
+            channels: {
+              "push": false,
+              "in_app": true,
+            },
+          },
+          template: {
+            _id: "space-new-post",
+            tags: [],
+          },
+        },
+      ]);
+      novuUpdateGlobalPreferenceStub = stubNovuUpdateGlobalPreferences();
+      novuUpdatePreferenceStub = stubNovuUpdateWorkflowPreferences();
+
+      const result = await fetchPreferences(novu, subscriberId);
+
+      assertEquals(result, expectedPreferences);
+      assertSpyCalls(novuUpdatePreferenceStub, 0);
+    });
   });
 
   describe("updating preferences", () => {
