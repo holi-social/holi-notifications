@@ -5,7 +5,7 @@ import {
 } from "./novu_types.ts";
 import { GraphQLServer } from "./server.ts";
 import {
-  novu,
+  novuMock,
   testGlobalPreferences,
   testWorkflowPreferences,
 } from "./test_data.ts";
@@ -41,7 +41,7 @@ export const stubNovuGlobalPreferences = (
   response: NovuGlobalPreferences[] | Error = testGlobalPreferences,
 ) =>
   stub(
-    novu.subscribers,
+    novuMock.subscribers,
     "getGlobalPreference",
     // @ts-ignore: Full mock of AxiosResponse not necessary
     returnsNext([
@@ -55,7 +55,7 @@ export const stubNovuWorkflowPreferences = (
   response: NovuWorkflowPreferences[] | Error = testWorkflowPreferences,
 ) =>
   stub(
-    novu.subscribers,
+    novuMock.subscribers,
     "getPreference",
     // @ts-ignore: Full mock of AxiosResponse not necessary
     returnsNext([
@@ -67,7 +67,7 @@ export const stubNovuWorkflowPreferences = (
 
 export const stubNovuUpdateGlobalPreferences = (error?: Error) =>
   stub(
-    novu.subscribers,
+    novuMock.subscribers,
     "updateGlobalPreference",
     // @ts-ignore: Full mock of AxiosResponse not necessary
     returnsNext([
@@ -77,7 +77,7 @@ export const stubNovuUpdateGlobalPreferences = (error?: Error) =>
 
 export const stubNovuUpdateWorkflowPreferences = (error?: Error) =>
   stub(
-    novu.subscribers,
+    novuMock.subscribers,
     "updatePreference",
     returnsNext(
       (error ? [Promise.reject(error)] : []).concat(

@@ -19,7 +19,7 @@ import {
 } from "./test_helpers.ts";
 import {
   globalUpdate,
-  novu,
+  novuMock,
   preferencesAllEnabled,
   subscriberId,
 } from "./test_data.ts";
@@ -50,21 +50,21 @@ describe("novu", () => {
       novuGlobalPreferenceStub = stubNovuGlobalPreferences();
       novuPreferenceStub = stubNovuWorkflowPreferences();
 
-      await fetchPreferences(novu, subscriberId);
+      await fetchPreferences(novuMock, subscriberId);
 
       assertSpyCall(novuGlobalPreferenceStub, 0, {
-        self: novu.subscribers,
+        self: novuMock.subscribers,
         args: [subscriberId],
       });
       assertSpyCall(novuPreferenceStub, 0, {
-        self: novu.subscribers,
+        self: novuMock.subscribers,
         args: [subscriberId],
       });
     });
 
     it("throws unauthorized error for missing subscriber id", async () => {
       await assertRejects(
-        () => fetchPreferences(novu, undefined),
+        () => fetchPreferences(novuMock, undefined),
         GraphQLError,
         "Unauthorized",
       );
@@ -72,7 +72,7 @@ describe("novu", () => {
 
     it("throws unauthorized error for empty subscriber id", async () => {
       await assertRejects(
-        () => fetchPreferences(novu, ""),
+        () => fetchPreferences(novuMock, ""),
         GraphQLError,
         "Unauthorized",
       );
@@ -99,7 +99,7 @@ describe("novu", () => {
       novuGlobalPreferenceStub = stubNovuGlobalPreferences();
       novuPreferenceStub = stubNovuWorkflowPreferences();
 
-      const result = await fetchPreferences(novu, subscriberId);
+      const result = await fetchPreferences(novuMock, subscriberId);
 
       assertEquals(result, expectedPreferences);
     });
@@ -115,7 +115,7 @@ describe("novu", () => {
       novuGlobalPreferenceStub = stubNovuGlobalPreferences();
       novuPreferenceStub = stubNovuWorkflowPreferences([]);
 
-      const result = await fetchPreferences(novu, subscriberId);
+      const result = await fetchPreferences(novuMock, subscriberId);
 
       assertEquals(result, expectedPreferences);
     });
@@ -125,7 +125,7 @@ describe("novu", () => {
       novuPreferenceStub = stubNovuWorkflowPreferences();
 
       await assertRejects(
-        () => fetchPreferences(novu, subscriberId),
+        () => fetchPreferences(novuMock, subscriberId),
         Error,
         "Test",
       );
@@ -136,7 +136,7 @@ describe("novu", () => {
       novuPreferenceStub = stubNovuWorkflowPreferences(new Error("Test"));
 
       await assertRejects(
-        () => fetchPreferences(novu, subscriberId),
+        () => fetchPreferences(novuMock, subscriberId),
         Error,
         "Test",
       );
@@ -147,7 +147,7 @@ describe("novu", () => {
       novuPreferenceStub = stubNovuWorkflowPreferences();
 
       await assertRejects(
-        () => fetchPreferences(novu, subscriberId),
+        () => fetchPreferences(novuMock, subscriberId),
         Error,
         "Cannot read properties of undefined",
       );
@@ -185,7 +185,7 @@ describe("novu", () => {
       novuUpdateGlobalPreferenceStub = stubNovuUpdateGlobalPreferences();
       novuUpdatePreferenceStub = stubNovuUpdateWorkflowPreferences();
 
-      const result = await fetchPreferences(novu, subscriberId);
+      const result = await fetchPreferences(novuMock, subscriberId);
 
       assertEquals(result, expectedPreferences);
       assertSpyCalls(novuUpdatePreferenceStub, 0);
@@ -199,21 +199,21 @@ describe("novu", () => {
       novuUpdateGlobalPreferenceStub = stubNovuUpdateGlobalPreferences();
       novuUpdatePreferenceStub = stubNovuUpdateWorkflowPreferences();
 
-      await updatePreferences(novu, subscriberId, globalUpdate);
+      await updatePreferences(novuMock, subscriberId, globalUpdate);
 
       assertSpyCall(novuGlobalPreferenceStub, 0, {
-        self: novu.subscribers,
+        self: novuMock.subscribers,
         args: [subscriberId],
       });
       assertSpyCall(novuPreferenceStub, 0, {
-        self: novu.subscribers,
+        self: novuMock.subscribers,
         args: [subscriberId],
       });
     });
 
     it("throws unauthorized error for missing subscriber id", async () => {
       await assertRejects(
-        () => updatePreferences(novu, undefined, globalUpdate),
+        () => updatePreferences(novuMock, undefined, globalUpdate),
         GraphQLError,
         "Unauthorized",
       );
@@ -221,7 +221,7 @@ describe("novu", () => {
 
     it("throws unauthorized error for empty subscriber id", async () => {
       await assertRejects(
-        () => updatePreferences(novu, "", globalUpdate),
+        () => updatePreferences(novuMock, "", globalUpdate),
         GraphQLError,
         "Unauthorized",
       );
@@ -234,7 +234,7 @@ describe("novu", () => {
       novuUpdatePreferenceStub = stubNovuUpdateWorkflowPreferences();
 
       await assertRejects(
-        () => updatePreferences(novu, subscriberId, globalUpdate),
+        () => updatePreferences(novuMock, subscriberId, globalUpdate),
         Error,
         "Test",
       );
@@ -247,7 +247,7 @@ describe("novu", () => {
       novuUpdatePreferenceStub = stubNovuUpdateWorkflowPreferences();
 
       await assertRejects(
-        () => updatePreferences(novu, subscriberId, globalUpdate),
+        () => updatePreferences(novuMock, subscriberId, globalUpdate),
         Error,
         "Test",
       );
@@ -260,7 +260,7 @@ describe("novu", () => {
       novuUpdatePreferenceStub = stubNovuUpdateWorkflowPreferences();
 
       await assertRejects(
-        () => updatePreferences(novu, subscriberId, globalUpdate),
+        () => updatePreferences(novuMock, subscriberId, globalUpdate),
         Error,
         "Cannot read properties of undefined",
       );
@@ -275,7 +275,7 @@ describe("novu", () => {
       novuUpdatePreferenceStub = stubNovuUpdateWorkflowPreferences();
 
       await assertRejects(
-        () => updatePreferences(novu, subscriberId, globalUpdate),
+        () => updatePreferences(novuMock, subscriberId, globalUpdate),
         Error,
         "Test",
       );
@@ -290,7 +290,7 @@ describe("novu", () => {
       );
 
       await assertRejects(
-        () => updatePreferences(novu, subscriberId, globalUpdate),
+        () => updatePreferences(novuMock, subscriberId, globalUpdate),
         Error,
         "Test",
       );
@@ -302,23 +302,23 @@ describe("novu", () => {
       novuUpdateGlobalPreferenceStub = stubNovuUpdateGlobalPreferences();
       novuUpdatePreferenceStub = stubNovuUpdateWorkflowPreferences();
 
-      await updatePreferences(novu, subscriberId, globalUpdate);
+      await updatePreferences(novuMock, subscriberId, globalUpdate);
 
       assertSpyCall(novuUpdateGlobalPreferenceStub, 0, {
-        self: novu.subscribers,
+        self: novuMock.subscribers,
         args: [subscriberId, {
           preferences: [{ enabled: false, type: "push" }],
         }],
       });
       assertSpyCalls(novuUpdatePreferenceStub, 2);
       assertSpyCall(novuUpdatePreferenceStub, 0, {
-        self: novu.subscribers,
+        self: novuMock.subscribers,
         args: [subscriberId, "space-membership-request-accept", {
           channel: { enabled: false, type: "push" },
         }],
       });
       assertSpyCall(novuUpdatePreferenceStub, 1, {
-        self: novu.subscribers,
+        self: novuMock.subscribers,
         args: [subscriberId, "space-membership-request-decline", {
           channel: { enabled: false, type: "push" },
         }],
@@ -331,14 +331,14 @@ describe("novu", () => {
       novuUpdateGlobalPreferenceStub = stubNovuUpdateGlobalPreferences();
       novuUpdatePreferenceStub = stubNovuUpdateWorkflowPreferences();
 
-      await updatePreferences(novu, subscriberId, {
+      await updatePreferences(novuMock, subscriberId, {
         ...globalUpdate,
         channel: ChannelTypeEnum.EMAIL,
       });
 
       assertSpyCalls(novuUpdatePreferenceStub, 1);
       assertSpyCall(novuUpdatePreferenceStub, 0, {
-        self: novu.subscribers,
+        self: novuMock.subscribers,
         args: [subscriberId, "space-membership-request-accept", {
           channel: { enabled: false, type: "email" },
         }],
@@ -351,7 +351,7 @@ describe("novu", () => {
       novuUpdateGlobalPreferenceStub = stubNovuUpdateGlobalPreferences();
       novuUpdatePreferenceStub = stubNovuUpdateWorkflowPreferences();
 
-      await updatePreferences(novu, subscriberId, {
+      await updatePreferences(novuMock, subscriberId, {
         ...globalUpdate,
         enabled: true,
       });
@@ -359,7 +359,7 @@ describe("novu", () => {
       assertSpyCalls(novuUpdateGlobalPreferenceStub, 0);
       assertSpyCalls(novuUpdatePreferenceStub, 1);
       assertSpyCall(novuUpdatePreferenceStub, 0, {
-        self: novu.subscribers,
+        self: novuMock.subscribers,
         args: [subscriberId, "space-new-post", {
           channel: { enabled: true, type: "push" },
         }],
@@ -372,7 +372,7 @@ describe("novu", () => {
       novuUpdateGlobalPreferenceStub = stubNovuUpdateGlobalPreferences();
       novuUpdatePreferenceStub = stubNovuUpdateWorkflowPreferences();
 
-      await updatePreferences(novu, subscriberId, {
+      await updatePreferences(novuMock, subscriberId, {
         ...globalUpdate,
         id: "SPACE_MEMBERSHIP_REQUEST",
       });
@@ -380,13 +380,13 @@ describe("novu", () => {
       assertSpyCalls(novuUpdateGlobalPreferenceStub, 0);
       assertSpyCalls(novuUpdatePreferenceStub, 2);
       assertSpyCall(novuUpdatePreferenceStub, 0, {
-        self: novu.subscribers,
+        self: novuMock.subscribers,
         args: [subscriberId, "space-membership-request-accept", {
           channel: { enabled: false, type: "push" },
         }],
       });
       assertSpyCall(novuUpdatePreferenceStub, 1, {
-        self: novu.subscribers,
+        self: novuMock.subscribers,
         args: [subscriberId, "space-membership-request-decline", {
           channel: { enabled: false, type: "push" },
         }],
@@ -416,7 +416,11 @@ describe("novu", () => {
       novuUpdateGlobalPreferenceStub = stubNovuUpdateGlobalPreferences();
       novuUpdatePreferenceStub = stubNovuUpdateWorkflowPreferences();
 
-      const result = await updatePreferences(novu, subscriberId, globalUpdate);
+      const result = await updatePreferences(
+        novuMock,
+        subscriberId,
+        globalUpdate,
+      );
 
       assertEquals(result, expectedPreferences);
     });
@@ -434,7 +438,11 @@ describe("novu", () => {
       novuUpdateGlobalPreferenceStub = stubNovuUpdateGlobalPreferences();
       novuUpdatePreferenceStub = stubNovuUpdateWorkflowPreferences();
 
-      const result = await updatePreferences(novu, subscriberId, globalUpdate);
+      const result = await updatePreferences(
+        novuMock,
+        subscriberId,
+        globalUpdate,
+      );
 
       assertEquals(result, expectedPreferences);
       assertSpyCalls(novuUpdatePreferenceStub, 0);

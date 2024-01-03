@@ -120,7 +120,7 @@ export const createGraphQLServer = (
       return {
         ...context,
         userId: headers.get(HEADER_USER_ID),
-      };
+      } as GraphQLContext;
     },
   });
 };

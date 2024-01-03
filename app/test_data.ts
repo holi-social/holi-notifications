@@ -10,7 +10,12 @@ export const testConfig = {
   environment: "local",
 };
 export const subscriberId = "testSubscriberId";
-export const novu = new Novu(testConfig.novuConfig.apiKey);
+type NovuSubscribers = Novu["subscribers"];
+class NovuSubscribersMock implements Partial<NovuSubscribers> {}
+class NovuMock implements Partial<Novu> {
+  subscribers = new NovuSubscribersMock() as NovuSubscribers;
+}
+export const novuMock = new NovuMock() as Novu;
 const novuPreferencesAllEnabled = {
   enabled: true,
   channels: {

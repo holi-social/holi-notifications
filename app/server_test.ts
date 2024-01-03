@@ -17,7 +17,7 @@ import {
 import { PreferencesResponse, UpdatePreferencesInput } from "./types.ts";
 import {
   globalUpdate,
-  novu,
+  novuMock,
   preferencesAllEnabled,
   subscriberId,
   testConfig,
@@ -122,7 +122,7 @@ describe("server", () => {
           preferences: preferencesAllEnabled,
         },
       ];
-      const graphQLServer = createGraphQLServer(novu, testConfig);
+      const graphQLServer = createGraphQLServer(novuMock, testConfig);
 
       const result = await queryPreferences(graphQLServer);
 
@@ -130,22 +130,22 @@ describe("server", () => {
     });
 
     it("correctly retrieves user id from header", async () => {
-      const graphQLServer = createGraphQLServer(novu, testConfig);
+      const graphQLServer = createGraphQLServer(novuMock, testConfig);
 
       await queryPreferences(graphQLServer);
 
       assertSpyCall(novuGlobalPreferenceStub, 0, {
-        self: novu.subscribers,
+        self: novuMock.subscribers,
         args: [subscriberId],
       });
       assertSpyCall(novuPreferenceStub, 0, {
-        self: novu.subscribers,
+        self: novuMock.subscribers,
         args: [subscriberId],
       });
     });
 
     it("does not fetch preferences if subscriber id is missing", async () => {
-      const graphQLServer = createGraphQLServer(novu, testConfig);
+      const graphQLServer = createGraphQLServer(novuMock, testConfig);
 
       const result = await queryPreferences(graphQLServer, {});
 
@@ -174,7 +174,7 @@ describe("server", () => {
           preferences: { push: false, email: true },
         },
       ];
-      const graphQLServer = createGraphQLServer(novu, testConfig);
+      const graphQLServer = createGraphQLServer(novuMock, testConfig);
 
       const result = await mutatePreferences(graphQLServer, globalUpdate);
 
@@ -182,32 +182,32 @@ describe("server", () => {
     });
 
     it("correctly retrieves user id from header", async () => {
-      const graphQLServer = createGraphQLServer(novu, testConfig);
+      const graphQLServer = createGraphQLServer(novuMock, testConfig);
 
       await mutatePreferences(graphQLServer, globalUpdate);
 
       assertSpyCall(novuGlobalPreferenceStub, 0, {
-        self: novu.subscribers,
+        self: novuMock.subscribers,
         args: [subscriberId],
       });
       assertSpyCall(novuPreferenceStub, 0, {
-        self: novu.subscribers,
+        self: novuMock.subscribers,
         args: [subscriberId],
       });
       assertSpyCall(novuUpdateGlobalPreferenceStub, 0, {
-        self: novu.subscribers,
+        self: novuMock.subscribers,
         args: [subscriberId, {
           preferences: [{ enabled: false, type: "push" }],
         }],
       });
       assertSpyCall(novuUpdatePreferenceStub, 0, {
-        self: novu.subscribers,
+        self: novuMock.subscribers,
         args: [subscriberId, "space-membership-request-accept", {
           channel: { enabled: false, type: "push" },
         }],
       });
       assertSpyCall(novuUpdatePreferenceStub, 1, {
-        self: novu.subscribers,
+        self: novuMock.subscribers,
         args: [subscriberId, "space-membership-request-decline", {
           channel: { enabled: false, type: "push" },
         }],
@@ -215,7 +215,7 @@ describe("server", () => {
     });
 
     it("does not update preferences if subscriber id is missing", async () => {
-      const graphQLServer = createGraphQLServer(novu, testConfig);
+      const graphQLServer = createGraphQLServer(novuMock, testConfig);
 
       const result = await mutatePreferences(graphQLServer, globalUpdate, {});
 
