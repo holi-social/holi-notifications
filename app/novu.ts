@@ -155,8 +155,15 @@ const applyUpdate = async (
   workflowPreferences: WorkflowTemplatePreferences,
   input: UpdatePreferencesInput,
 ): Promise<WorkflowTemplatePreferences> => {
+  // Ensure the channel is enabled globally if requested for workflow
+  const enableChannelGlobally = workflowPreferences.id === CATEGORY_GLOBAL &&
+    input.id !== CATEGORY_GLOBAL && input.enabled &&
+    !workflowPreferences.preferences[input.channel];
   // Leave preferences unchanged if not matching and not global change
-  if (!([CATEGORY_GLOBAL, workflowPreferences.id].includes(input.id))) {
+  if (
+    !([CATEGORY_GLOBAL, workflowPreferences.id].includes(input.id)) &&
+    !enableChannelGlobally
+  ) {
     return workflowPreferences;
   }
   // Return preferences unchanged if there is nothing to change or the channel

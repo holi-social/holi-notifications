@@ -393,6 +393,41 @@ describe("novu", () => {
       });
     });
 
+    it("enables channel globally during workflow update if necessary", async () => {
+      novuGlobalPreferenceStub = stubNovuGlobalPreferences([{
+        preference: {
+          enabled: true,
+          channels: {
+            "push": false,
+            "email": true,
+          },
+        },
+      }]);
+      novuPreferenceStub = stubNovuWorkflowPreferences();
+      novuUpdateGlobalPreferenceStub = stubNovuUpdateGlobalPreferences();
+      novuUpdatePreferenceStub = stubNovuUpdateWorkflowPreferences();
+
+      await updatePreferences(novuMock, subscriberId, {
+        id: "SPACE_NEW_POST",
+        channel: ChannelTypeEnum.PUSH,
+        enabled: true,
+      });
+
+      assertSpyCall(novuUpdateGlobalPreferenceStub, 0, {
+        self: novuMock.subscribers,
+        args: [subscriberId, {
+          preferences: [{ enabled: true, type: "push" }],
+        }],
+      });
+      assertSpyCalls(novuUpdatePreferenceStub, 1);
+      assertSpyCall(novuUpdatePreferenceStub, 0, {
+        self: novuMock.subscribers,
+        args: [subscriberId, "space-new-post", {
+          channel: { enabled: true, type: "push" },
+        }],
+      });
+    });
+
     it("returns aggregation of updated preferences", async () => {
       const expectedPreferences = [
         {
