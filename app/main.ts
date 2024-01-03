@@ -1,5 +1,5 @@
 import { logger, LogSeverity } from "./logging.ts";
-import { DEFAULT_PORT, startServer } from "./server.ts";
+import { DEFAULT_PORT, LOCAL_ENVIRONMENT, startServer } from "./server.ts";
 
 const environment = Deno.env.get("ENVIRONMENT") || "development";
 
@@ -40,6 +40,7 @@ const serverConfigFromEnv = () => {
         fake ? "dummy value" : undefined,
       ),
     },
+    environment: requiredEnv("ENVIRONMENT", String, LOCAL_ENVIRONMENT),
   };
 };
 

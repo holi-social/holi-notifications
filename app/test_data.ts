@@ -7,6 +7,7 @@ export const testConfig = {
     apiKey: "TEST-API-KEY",
     apiUrl: "TEST-API-URL",
   },
+  environment: "local",
 };
 export const subscriberId = "testSubscriberId";
 export const novu = new Novu(testConfig.novuConfig.apiKey);

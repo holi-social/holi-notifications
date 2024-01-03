@@ -16,11 +16,13 @@ import { PreferencesResponse, UpdatePreferencesParameters } from "./types.ts";
 
 export const DEFAULT_PORT = 8005;
 export const HEADER_USER_ID = "x-holi-user-id";
+export const LOCAL_ENVIRONMENT = "local";
 
 export interface ServerConfig {
   port: number; // default: 8005
   fake: boolean; // For local development. If set, the API returns dummy data
   novuConfig: NovuConfig;
+  environment: string;
 }
 
 export type GraphQLContext = {
@@ -111,7 +113,7 @@ export const createGraphQLServer = (
   const resolvers = createResolvers(novu, config);
   return createYoga({
     schema: createSchema({ resolvers, typeDefs }),
-    graphiql: true,
+    graphiql: config.environment === LOCAL_ENVIRONMENT,
     plugins,
     context: (context: GraphQLContext) => {
       const headers = new Headers(context.params?.extensions?.headers);
