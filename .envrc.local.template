@@ -1,0 +1,2 @@
+export NOVU_API_KEY=unknown
+export NOVU_API_URL=https://eu.api.novu.co
