@@ -428,6 +428,21 @@ describe("novu", () => {
       });
     });
 
+    it("does nothing for unknown workflows", async () => {
+      novuGlobalPreferenceStub = stubNovuGlobalPreferences();
+      novuPreferenceStub = stubNovuWorkflowPreferences();
+      novuUpdateGlobalPreferenceStub = stubNovuUpdateGlobalPreferences();
+      novuUpdatePreferenceStub = stubNovuUpdateWorkflowPreferences();
+
+      await updatePreferences(novuMock, subscriberId, {
+        ...globalUpdate,
+        id: "UNKNOWN",
+      });
+
+      assertSpyCalls(novuUpdateGlobalPreferenceStub, 0);
+      assertSpyCalls(novuUpdatePreferenceStub, 0);
+    });
+
     it("returns aggregation of updated preferences", async () => {
       const expectedPreferences = [
         {
