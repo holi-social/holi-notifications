@@ -15,7 +15,7 @@ import {
 import { PreferencesResponse, UpdatePreferencesParameters } from "./types.ts";
 
 export const DEFAULT_PORT = 8005;
-export const HEADER_USER_ID = "x-holi-user-id";
+export const HEADER_USER_ID = "X-Holi-User-ID";
 export const LOCAL_ENVIRONMENT = "local";
 
 export interface ServerConfig {
