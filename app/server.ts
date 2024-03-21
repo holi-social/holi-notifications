@@ -80,9 +80,8 @@ const createResolvers = (novu: Novu, config: ServerConfig) => {
         context: GraphQLContext,
       ): Promise<PreferencesResponse> => {
         // todo gregor: remove after fixing
-        if (!context.userId) {
-          logger.debug("Context was", context);
-        }
+        console.log("Context", context);
+        logger.info("Context", context);
         return config.fake
           ? Promise.resolve([])
           : fetchPreferences(novu, context.userId);
