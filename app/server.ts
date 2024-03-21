@@ -72,8 +72,6 @@ const createResolvers = (novu: Novu, config: ServerConfig) => {
         _parameters: any,
         context: ServiceContext,
       ): Promise<PreferencesResponse> => {
-        console.log("Context", context);
-        logger.info("Context", context);
         return config.fake
           ? Promise.resolve([])
           : fetchPreferences(novu, context.userId);
