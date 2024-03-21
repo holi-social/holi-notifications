@@ -27,7 +27,6 @@ export const processGqlRequest = (
       operationName: null,
       variables: variables,
       query: query,
-      extensions: { headers },
     }),
   });
   return graphQLServer.handleRequest(request)
