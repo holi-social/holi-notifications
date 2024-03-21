@@ -4,7 +4,6 @@ export {
   createYoga,
   type YogaInitialContext,
 } from "npm:graphql-yoga@5.1.0";
-export { useResponseCache } from "npm:@graphql-yoga/plugin-response-cache@3.2.0";
 export { Parser } from "https://deno.land/x/html_parser@v0.1.3/src/mod.ts";
 export { ChannelTypeEnum, Novu } from "npm:@novu/node@0.22.0";
 export { GraphQLError } from "npm:graphql@16.8.1";

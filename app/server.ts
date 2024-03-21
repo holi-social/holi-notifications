@@ -3,7 +3,6 @@ import {
   createYoga,
   Novu,
   serve,
-  useResponseCache,
   YogaInitialContext,
 } from "./deps.ts";
 import { logger } from "./logging.ts";
@@ -100,17 +99,10 @@ export const createGraphQLServer = (
   novu: Novu,
   config: ServerConfig,
 ): GraphQLServer => {
-  const plugins = [
-    useResponseCache({
-      // cache by user id
-      session: (request: Request) => request.headers.get(HEADER_USER_ID),
-    }),
-  ];
   const resolvers = createResolvers(novu, config);
   return createYoga({
     schema: createSchema({ resolvers, typeDefs }),
     graphiql: config.environment === LOCAL_ENVIRONMENT,
-    plugins,
     context: (context: YogaInitialContext) => {
       const headers = new Headers(context.request.headers);
       return {
