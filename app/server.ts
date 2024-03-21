@@ -4,6 +4,7 @@ import {
   Novu,
   serve,
   useResponseCache,
+  YogaInitialContext,
 } from "./deps.ts";
 import { logger } from "./logging.ts";
 import {
@@ -15,7 +16,7 @@ import {
 import { PreferencesResponse, UpdatePreferencesParameters } from "./types.ts";
 
 export const DEFAULT_PORT = 8005;
-export const HEADER_USER_ID = "X-Holi-User-ID";
+export const HEADER_USER_ID = "x-holi-user-id";
 export const LOCAL_ENVIRONMENT = "local";
 
 export interface ServerConfig {
@@ -25,16 +26,9 @@ export interface ServerConfig {
   environment: string;
 }
 
-export type GraphQLContext = {
-  params?: {
-    extensions?: {
-      headers?: {
-        [key: string]: string;
-      };
-    };
-  };
-  userId?: string;
-};
+export type ServiceContext = {
+  userId: string;
+} & YogaInitialContext;
 
 const typeDefs = `
     enum Channel {
@@ -77,9 +71,8 @@ const createResolvers = (novu: Novu, config: ServerConfig) => {
         _parent: any,
         // deno-lint-ignore no-explicit-any
         _parameters: any,
-        context: GraphQLContext,
+        context: ServiceContext,
       ): Promise<PreferencesResponse> => {
-        // todo gregor: remove after fixing
         console.log("Context", context);
         logger.info("Context", context);
         return config.fake
@@ -92,7 +85,7 @@ const createResolvers = (novu: Novu, config: ServerConfig) => {
         // deno-lint-ignore no-explicit-any
         _parent: any,
         parameters: UpdatePreferencesParameters,
-        context: GraphQLContext,
+        context: ServiceContext,
       ): Promise<PreferencesResponse> =>
         config.fake ? Promise.resolve([]) : updatePreferences(
           novu,
@@ -118,12 +111,12 @@ export const createGraphQLServer = (
     schema: createSchema({ resolvers, typeDefs }),
     graphiql: config.environment === LOCAL_ENVIRONMENT,
     plugins,
-    context: (context: GraphQLContext) => {
-      const headers = new Headers(context.params?.extensions?.headers);
+    context: (context: YogaInitialContext) => {
+      const headers = new Headers(context.request.headers);
       return {
         ...context,
         userId: headers.get(HEADER_USER_ID),
-      } as GraphQLContext;
+      } as ServiceContext;
     },
   });
 };

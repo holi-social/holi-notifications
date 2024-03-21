@@ -1,5 +1,9 @@
 export { serve } from "https://deno.land/std@0.155.0/http/server.ts";
-export { createSchema, createYoga } from "npm:graphql-yoga@5.1.0";
+export {
+  createSchema,
+  createYoga,
+  type YogaInitialContext,
+} from "npm:graphql-yoga@5.1.0";
 export { useResponseCache } from "npm:@graphql-yoga/plugin-response-cache@3.2.0";
 export { Parser } from "https://deno.land/x/html_parser@v0.1.3/src/mod.ts";
 export { ChannelTypeEnum, Novu } from "npm:@novu/node@0.22.0";
