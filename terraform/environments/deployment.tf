@@ -86,6 +86,7 @@ resource "google_cloud_run_service" "notifications_api" {
         # possible values: all-traffic/private-ranges-only(default) https://cloud.google.com/sdk/gcloud/reference/run/services/update#--vpc-egress
         "run.googleapis.com/vpc-access-egress" = "private-ranges-only"
       }
+      # labels set on the revision level
       labels = {
         "environment_type" = local.environment_type
         "holi_service"     = "notifications"
@@ -98,6 +99,11 @@ resource "google_cloud_run_service" "notifications_api" {
     annotations = {
       # possible values: all/internal/internal-and-cloud-load-balancing https://cloud.google.com/sdk/gcloud/reference/run/services/update#--ingress
       "run.googleapis.com/ingress" = "internal"
+    }
+    # labels set on the service level
+    labels = {
+      "environment_type" = local.environment_type
+      "holi_service"     = "notifications"
     }
   }
 
