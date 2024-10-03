@@ -1,33 +1,22 @@
-import {
-  createSchema,
-  createYoga,
-  Novu,
-  serve,
-  YogaInitialContext,
-} from "./deps.ts";
-import { logger } from "./logging.ts";
-import {
-  createNovuInstance,
-  fetchPreferences,
-  NovuConfig,
-  updatePreferences,
-} from "./novu.ts";
-import { PreferencesResponse, UpdatePreferencesParameters } from "./types.ts";
+import { createSchema, createYoga, Novu, serve, YogaInitialContext } from './deps.ts'
+import { logger } from './logging.ts'
+import { createNovuInstance, fetchPreferences, NovuConfig, updatePreferences } from './novu.ts'
+import { PreferencesResponse, UpdatePreferencesParameters } from './types.ts'
 
-export const DEFAULT_PORT = 8005;
-export const HEADER_USER_ID = "x-holi-user-id";
-export const LOCAL_ENVIRONMENT = "local";
+export const DEFAULT_PORT = 8005
+export const HEADER_USER_ID = 'x-holi-user-id'
+export const LOCAL_ENVIRONMENT = 'local'
 
 export interface ServerConfig {
-  port: number; // default: 8005
-  fake: boolean; // For local development. If set, the API returns dummy data
-  novuConfig: NovuConfig;
-  environment: string;
+  port: number // default: 8005
+  fake: boolean // For local development. If set, the API returns dummy data
+  novuConfig: NovuConfig
+  environment: string
 }
 
 export type ServiceContext = {
-  userId: string;
-} & YogaInitialContext;
+  userId: string
+} & YogaInitialContext
 
 const typeDefs = `
     enum Channel {
@@ -60,7 +49,7 @@ const typeDefs = `
         updatePreferences(input: UpdatePreferencesInput!): [WorkflowPreferences]!
     }
   
-`;
+`
 
 const createResolvers = (novu: Novu, config: ServerConfig) => {
   return {
@@ -72,9 +61,7 @@ const createResolvers = (novu: Novu, config: ServerConfig) => {
         _parameters: any,
         context: ServiceContext,
       ): Promise<PreferencesResponse> => {
-        return config.fake
-          ? Promise.resolve([])
-          : fetchPreferences(novu, context.userId);
+        return config.fake ? Promise.resolve([]) : fetchPreferences(novu, context.userId)
       },
     },
     Mutation: {
@@ -90,49 +77,47 @@ const createResolvers = (novu: Novu, config: ServerConfig) => {
           parameters.input,
         ),
     },
-  };
-};
+  }
+}
 
 export const createGraphQLServer = (
   novu: Novu,
   config: ServerConfig,
 ): GraphQLServer => {
-  const resolvers = createResolvers(novu, config);
+  const resolvers = createResolvers(novu, config)
   return createYoga({
     schema: createSchema({ resolvers, typeDefs }),
     graphiql: config.environment === LOCAL_ENVIRONMENT,
     context: (context: YogaInitialContext) => {
-      const headers = new Headers(context.request.headers);
+      const headers = new Headers(context.request.headers)
       return {
         ...context,
         userId: headers.get(HEADER_USER_ID),
-      } as ServiceContext;
+      } as ServiceContext
     },
-  });
-};
+  })
+}
 
 // deno-lint-ignore no-explicit-any
-export type GraphQLServer = any;
+export type GraphQLServer = any
 
 export const startServer = (config: ServerConfig): Promise<void> => {
-  const novuInstance = createNovuInstance(config.novuConfig);
+  const novuInstance = createNovuInstance(config.novuConfig)
   const graphQLServer: GraphQLServer = createGraphQLServer(
     novuInstance,
     config,
-  );
+  )
   return serve(graphQLServer.handleRequest, {
     port: config.port,
     onListen({ port, hostname }) {
       logger.info(
-        `Server started at http://${
-          hostname === "0.0.0.0" ? "localhost" : hostname
-        }:${port}/graphql`,
-      );
+        `Server started at http://${hostname === '0.0.0.0' ? 'localhost' : hostname}:${port}/graphql`,
+      )
       if (config.fake) {
         logger.info(
           `Server is serving fake data due to FAKE env var set to true`,
-        );
+        )
       }
     },
-  });
-};
+  })
+}
