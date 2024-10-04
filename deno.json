@@ -19,6 +19,9 @@
     }
   },
   "fmt": {
+    "lineWidth": 120,
+    "singleQuote": true,
+    "semiColons": false,
     "exclude": [
       "*.md"
     ]
