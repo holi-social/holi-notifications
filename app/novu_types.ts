@@ -1,26 +1,26 @@
-import { ChannelTypeEnum } from "./deps.ts";
+import { ChannelTypeEnum } from './deps.ts'
 
 export interface NovuResponse<T> {
-  data: T;
+  data: T
 }
 
 interface NovuWorkflowTemplate {
-  _id: string;
-  tags: string[];
+  _id: string
+  tags: string[]
 }
 
 export type NovuChannelPreferences = {
-  [key in ChannelTypeEnum]?: boolean;
-};
+  [key in ChannelTypeEnum]?: boolean
+}
 
 interface NovuPreferences {
-  enabled: boolean;
-  channels: NovuChannelPreferences;
+  enabled: boolean
+  channels: NovuChannelPreferences
 }
 
 export interface NovuWorkflowPreferences {
-  template: NovuWorkflowTemplate;
-  preference: NovuPreferences;
+  template: NovuWorkflowTemplate
+  preference: NovuPreferences
 }
 
-export type NovuGlobalPreferences = Omit<NovuWorkflowPreferences, "template">;
+export type NovuGlobalPreferences = Omit<NovuWorkflowPreferences, 'template'>
