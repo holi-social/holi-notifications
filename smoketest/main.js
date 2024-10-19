@@ -1,7 +1,6 @@
 import http from 'k6/http'
 import { check, sleep } from 'k6'
 
-
 // You don't need to change anything in this section, it's k6 glue code.
 // See the default function at the end of the file for defining your smoketest.
 // This configuration only executes 1 test, enough for a smoketest. The smoketest will fail on any check failing.
@@ -35,7 +34,7 @@ export default () => {
     check(JSON.parse(response.body), {
       // there can be multiple tests here, e.g.
       //"contains topics object": (r) => typeof r.data.topics != null,
-      'returns unauthorized error': (r) => r.errors[0].message === "Unauthorized",
+      'returns unauthorized error': (r) => r.errors[0].message === 'Unauthorized',
     })
   })
 }
