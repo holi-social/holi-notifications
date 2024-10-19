@@ -11,7 +11,7 @@
       "dev": "deno run --allow-import --allow-net --allow-env --allow-read --lock=deno.lock --cached-only --watch app/main.ts",
       "start": "deno run --allow-import --allow-net --allow-env --allow-read --lock=deno.lock --cached-only app/main.ts",
       "docker": "docker build -t notifications-api . && docker run -it --init -p 8005:8005 notifications-api",
-      "coverage": "deno test --coverage=coverage && deno coverage coverage",
+      "coverage": "deno test --allow-import --coverage=coverage && deno coverage coverage",
       "pre-commit": {
         "cmd": "vr lint && vr fmt:check",
         "gitHook": "pre-commit"
