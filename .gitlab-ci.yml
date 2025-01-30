@@ -15,7 +15,7 @@ variables:
 
 .deploy:
   image:
-    name: 'europe-north1-docker.pkg.dev/holi-shared/docker-hub-remote/hashicorp/terraform:1.9.8'
+    name: 'europe-north1-docker.pkg.dev/holi-shared/docker-hub-remote/hashicorp/terraform:1.10.5'
     # default entrypoint is terraform command, but we want to run shell scripts
     entrypoint: ['/bin/sh', '-c']
   variables:
@@ -112,7 +112,7 @@ review_smoketest:
 review_destroy:
   needs: ['review_deploy']
   image:
-    name: 'europe-north1-docker.pkg.dev/holi-shared/docker-hub-remote/hashicorp/terraform:1.9.8'
+    name: 'europe-north1-docker.pkg.dev/holi-shared/docker-hub-remote/hashicorp/terraform:1.10.5'
     # default entrypoint is terraform command, but we want to run shell scripts
     entrypoint: ['/bin/sh', '-c']
   variables:
@@ -171,6 +171,9 @@ staging_trigger_unified-api_redeployment:
   trigger:
     project: 'app/holi-unified-api'
     branch: 'main'
+    forward:
+      yaml_variables: false
+      pipeline_variables: false
   only:
     - main
 
@@ -200,6 +203,9 @@ production_trigger_unified-api_redeployment:
   trigger:
     project: 'app/holi-unified-api'
     branch: 'production'
+    forward:
+      yaml_variables: false
+      pipeline_variables: false
   only:
     - production
   resource_group: unified-api-production
