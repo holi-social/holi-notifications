@@ -102,12 +102,20 @@ export const createGraphQLServer = (
 export type GraphQLServer = any
 
 export const startServer = (config: ServerConfig): Promise<void> => {
-  const novuInstance = createNovuInstance(config.novuConfig)
-  const graphQLServer: GraphQLServer = createGraphQLServer(
-    novuInstance,
-    config,
-  )
-  return serve(graphQLServer.handleRequest, {
+  const novu = createNovuInstance(config.novuConfig)
+  const graphQLServer: GraphQLServer = createGraphQLServer(novu, config)
+
+  const handler = (request: Request): Response => {
+    const url = new URL(request.url)
+
+    if (url.pathname === '/health') {
+      return new Response('OK', { status: 200 })
+    }
+
+    return graphQLServer.handleRequest(request)
+  }
+
+  return serve(handler, {
     port: config.port,
     onListen({ port, hostname }) {
       logger.info(

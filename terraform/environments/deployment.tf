@@ -73,6 +73,24 @@ resource "google_cloud_run_service" "notifications_api" {
             memory = local.environment == "production" ? "512Mi" : "256Mi"
           }
         }
+        startup_probe {
+          http_get {
+            path = "/health"
+          }
+          initial_delay_seconds = 5
+          failure_threshold     = 3
+          period_seconds        = 5
+          timeout_seconds       = 2
+        }
+        liveness_probe {
+          http_get {
+            path = "/health"
+          }
+          initial_delay_seconds = 10
+          period_seconds        = 30
+          timeout_seconds       = 2
+          failure_threshold     = 3
+        }
       }
       container_concurrency = 0 # 0 means thread safe, no restriction on max concurrency
     }
@@ -85,7 +103,7 @@ resource "google_cloud_run_service" "notifications_api" {
         "run.googleapis.com/vpc-access-connector" = data.terraform_remote_state.holi_infra_state.outputs.vpc_access_connector_name
         # possible values: all-traffic/private-ranges-only(default) https://cloud.google.com/sdk/gcloud/reference/run/services/update#--vpc-egress
         "run.googleapis.com/vpc-access-egress" = "private-ranges-only"
-        "run.googleapis.com/startup-cpu-boost"    = "true"
+        "run.googleapis.com/startup-cpu-boost" = "true"
       }
       # labels set on the revision level
       labels = {
