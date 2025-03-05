@@ -15,7 +15,7 @@ variables:
 
 .deploy:
   image:
-    name: 'europe-north1-docker.pkg.dev/holi-shared/docker-hub-remote/hashicorp/terraform:1.10.5'
+    name: 'europe-north1-docker.pkg.dev/holi-shared/docker-hub-remote/hashicorp/terraform:1.11.0'
     # default entrypoint is terraform command, but we want to run shell scripts
     entrypoint: ['/bin/sh', '-c']
   variables:
@@ -49,7 +49,7 @@ variables:
 ## common steps
 
 cache_lint_test:
-  image: 'europe-north1-docker.pkg.dev/holi-shared/docker-hub-remote/denoland/deno:2.2.2'
+  image: 'europe-north1-docker.pkg.dev/holi-shared/docker-hub-remote/denoland/deno:2.2.3'
   stage: 'test'
   script:
     - deno cache --allow-import --lock=deno.lock app/deps.ts app/dev_deps.ts
@@ -72,9 +72,9 @@ include:
 
 build_docker:
   needs: ['cache_lint_test']
-  image: 'europe-north1-docker.pkg.dev/holi-shared/docker-hub-remote/docker:27'
+  image: 'europe-north1-docker.pkg.dev/holi-shared/docker-hub-remote/docker:28'
   services:
-    - name: 'europe-north1-docker.pkg.dev/holi-shared/docker-hub-remote/docker:27-dind'
+    - name: 'europe-north1-docker.pkg.dev/holi-shared/docker-hub-remote/docker:28-dind'
       alias: 'docker'
   variables:
     # this could be fetched via terraform output ("gcr_location" in infra project), but then we would need an extra job for terraform
@@ -112,7 +112,7 @@ review_smoketest:
 review_destroy:
   needs: ['review_deploy']
   image:
-    name: 'europe-north1-docker.pkg.dev/holi-shared/docker-hub-remote/hashicorp/terraform:1.10.5'
+    name: 'europe-north1-docker.pkg.dev/holi-shared/docker-hub-remote/hashicorp/terraform:1.11.0'
     # default entrypoint is terraform command, but we want to run shell scripts
     entrypoint: ['/bin/sh', '-c']
   variables:
