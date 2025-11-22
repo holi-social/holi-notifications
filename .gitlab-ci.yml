@@ -13,7 +13,7 @@ variables:
 
 .deploy:
   image:
-    name: 'europe-north1-docker.pkg.dev/holi-shared/docker-hub-remote/hashicorp/terraform:1.11.4'
+    name: 'europe-north1-docker.pkg.dev/holi-shared/docker-hub-remote/hashicorp/terraform:1.14.0'
     # default entrypoint is terraform command, but we want to run shell scripts
     entrypoint: ['/bin/sh', '-c']
   variables:
@@ -70,9 +70,9 @@ include:
 
 build_docker:
   needs: ['cache_lint_test']
-  image: 'europe-north1-docker.pkg.dev/holi-shared/docker-hub-remote/docker:28'
+  image: 'europe-north1-docker.pkg.dev/holi-shared/docker-hub-remote/docker:29'
   services:
-    - name: 'europe-north1-docker.pkg.dev/holi-shared/docker-hub-remote/docker:28-dind'
+    - name: 'europe-north1-docker.pkg.dev/holi-shared/docker-hub-remote/docker:29-dind'
       alias: 'docker'
   variables:
     # this could be fetched via terraform output ("gcr_location" in infra project), but then we would need an extra job for terraform
@@ -110,7 +110,7 @@ review_smoketest:
 review_destroy:
   needs: ['review_deploy']
   image:
-    name: 'europe-north1-docker.pkg.dev/holi-shared/docker-hub-remote/hashicorp/terraform:1.11.4'
+    name: 'europe-north1-docker.pkg.dev/holi-shared/docker-hub-remote/hashicorp/terraform:1.14.0'
     # default entrypoint is terraform command, but we want to run shell scripts
     entrypoint: ['/bin/sh', '-c']
   variables:

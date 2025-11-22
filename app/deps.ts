@@ -4,7 +4,7 @@ export { Parser } from 'https://deno.land/x/html_parser@v0.1.3/src/mod.ts'
 export { ChannelTypeEnum, Novu } from 'npm:@novu/node@0.22.0'
 export { GraphQLError } from 'npm:graphql@16.8.1'
 // @deno-types="npm:@types/lodash.groupby@4.6.9"
-import groupBy from 'npm:lodash.groupby@4.6.0'
+import groupBy from 'lodash.groupby'
 // @deno-types="npm:@types/lodash.partition@4.6.9"
-import partition from 'npm:lodash.partition@4.6.0'
+import partition from 'lodash.partition'
 export { groupBy, partition }
