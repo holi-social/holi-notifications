@@ -1,402 +1,373 @@
 {
-  "version": "3",
-  "packages": {
-    "specifiers": {
-      "npm:@graphql-yoga/plugin-response-cache@3.2.0": "npm:@graphql-yoga/plugin-response-cache@3.2.0_graphql@16.8.1_graphql-yoga@5.1.0__graphql@16.8.1",
-      "npm:@novu/node@0.22.0": "npm:@novu/node@0.22.0",
-      "npm:@types/lodash.groupby@4.6.9": "npm:@types/lodash.groupby@4.6.9",
-      "npm:@types/lodash.partition@4.6.9": "npm:@types/lodash.partition@4.6.9",
-      "npm:graphql-yoga@5.1.0": "npm:graphql-yoga@5.1.0_graphql@16.8.1",
-      "npm:graphql@16.8.1": "npm:graphql@16.8.1",
-      "npm:lodash.groupby@4.6.0": "npm:lodash.groupby@4.6.0",
-      "npm:lodash.partition@4.6.0": "npm:lodash.partition@4.6.0"
+  "version": "5",
+  "specifiers": {
+    "npm:@graphql-yoga/plugin-response-cache@3.2.0": "3.2.0_graphql@16.8.1_graphql-yoga@5.1.0__graphql@16.8.1",
+    "npm:@novu/node@0.22.0": "0.22.0",
+    "npm:@types/lodash.groupby@4.6.9": "4.6.9",
+    "npm:@types/lodash.partition@4.6.9": "4.6.9",
+    "npm:graphql-yoga@5.1.0": "5.1.0_graphql@16.8.1",
+    "npm:graphql@16.8.1": "16.8.1",
+    "npm:lodash.groupby@4.6.0": "4.6.0",
+    "npm:lodash.partition@4.6.0": "4.6.0"
+  },
+  "npm": {
+    "@babel/runtime@7.23.7": {
+      "integrity": "sha512-w06OXVOFso7LcbzMiDGt+3X7Rh7Ho8MmgPoWU3rarH+8upf+wSU/grlGbWzQyr3DkdN6ZeuMFjpdwW0Q+HxobA==",
+      "dependencies": [
+        "regenerator-runtime"
+      ]
     },
-    "npm": {
-      "@babel/runtime@7.23.7": {
-        "integrity": "sha512-w06OXVOFso7LcbzMiDGt+3X7Rh7Ho8MmgPoWU3rarH+8upf+wSU/grlGbWzQyr3DkdN6ZeuMFjpdwW0Q+HxobA==",
-        "dependencies": {
-          "regenerator-runtime": "regenerator-runtime@0.14.1"
-        }
-      },
-      "@envelop/core@5.0.0": {
-        "integrity": "sha512-aJdnH/ptv+cvwfvciCBe7TSvccBwo9g0S5f6u35TBVzRVqIGkK03lFlIL+x1cnfZgN9EfR2b1PH2galrT1CdCQ==",
-        "dependencies": {
-          "@envelop/types": "@envelop/types@5.0.0",
-          "tslib": "tslib@2.6.2"
-        }
-      },
-      "@envelop/response-cache@6.1.2_@envelop+core@5.0.0_graphql@16.8.1": {
-        "integrity": "sha512-vBX6z/TxBZSNReVn69VJVkdGHpGzHyeQNMz9LXobczl55KCZaf2inBWguSdGq+vx6PlB068GhLeg+a7kseiF1Q==",
-        "dependencies": {
-          "@envelop/core": "@envelop/core@5.0.0",
-          "@graphql-tools/utils": "@graphql-tools/utils@10.0.12_graphql@16.8.1",
-          "@whatwg-node/fetch": "@whatwg-node/fetch@0.9.15",
-          "fast-json-stable-stringify": "fast-json-stable-stringify@2.1.0",
-          "graphql": "graphql@16.8.1",
-          "lru-cache": "lru-cache@10.1.0",
-          "tslib": "tslib@2.6.2"
-        }
-      },
-      "@envelop/types@5.0.0": {
-        "integrity": "sha512-IPjmgSc4KpQRlO4qbEDnBEixvtb06WDmjKfi/7fkZaryh5HuOmTtixe1EupQI5XfXO8joc3d27uUZ0QdC++euA==",
-        "dependencies": {
-          "tslib": "tslib@2.6.2"
-        }
-      },
-      "@graphql-tools/executor@1.2.0_graphql@16.8.1": {
-        "integrity": "sha512-SKlIcMA71Dha5JnEWlw4XxcaJ+YupuXg0QCZgl2TOLFz4SkGCwU/geAsJvUJFwK2RbVLpQv/UMq67lOaBuwDtg==",
-        "dependencies": {
-          "@graphql-tools/utils": "@graphql-tools/utils@10.0.12_graphql@16.8.1",
-          "@graphql-typed-document-node/core": "@graphql-typed-document-node/core@3.2.0_graphql@16.8.1",
-          "@repeaterjs/repeater": "@repeaterjs/repeater@3.0.5",
-          "graphql": "graphql@16.8.1",
-          "tslib": "tslib@2.6.2",
-          "value-or-promise": "value-or-promise@1.0.12"
-        }
-      },
-      "@graphql-tools/merge@9.0.1_graphql@16.8.1": {
-        "integrity": "sha512-hIEExWO9fjA6vzsVjJ3s0cCQ+Q/BEeMVJZtMXd7nbaVefVy0YDyYlEkeoYYNV3NVVvu1G9lr6DM1Qd0DGo9Caw==",
-        "dependencies": {
-          "@graphql-tools/utils": "@graphql-tools/utils@10.0.12_graphql@16.8.1",
-          "graphql": "graphql@16.8.1",
-          "tslib": "tslib@2.6.2"
-        }
-      },
-      "@graphql-tools/schema@10.0.2_graphql@16.8.1": {
-        "integrity": "sha512-TbPsIZnWyDCLhgPGnDjt4hosiNU2mF/rNtSk5BVaXWnZqvKJ6gzJV4fcHcvhRIwtscDMW2/YTnK6dLVnk8pc4w==",
-        "dependencies": {
-          "@graphql-tools/merge": "@graphql-tools/merge@9.0.1_graphql@16.8.1",
-          "@graphql-tools/utils": "@graphql-tools/utils@10.0.12_graphql@16.8.1",
-          "graphql": "graphql@16.8.1",
-          "tslib": "tslib@2.6.2",
-          "value-or-promise": "value-or-promise@1.0.12"
-        }
-      },
-      "@graphql-tools/utils@10.0.12_graphql@16.8.1": {
-        "integrity": "sha512-+yS1qlFwXlwU3Gv8ek/h2aJ95quog4yF22haC11M0zReMSTddbGJZ5yXKkE3sXoY2BcL1utilSFjylJ9uXpSNQ==",
-        "dependencies": {
-          "@graphql-typed-document-node/core": "@graphql-typed-document-node/core@3.2.0_graphql@16.8.1",
-          "cross-inspect": "cross-inspect@1.0.0",
-          "dset": "dset@3.1.3",
-          "graphql": "graphql@16.8.1",
-          "tslib": "tslib@2.6.2"
-        }
-      },
-      "@graphql-typed-document-node/core@3.2.0_graphql@16.8.1": {
-        "integrity": "sha512-mB9oAsNCm9aM3/SOv4YtBMqZbYj10R7dkq8byBqxGY/ncFwhf2oQzMV+LCRlWoDSEBJ3COiR1yeDvMtsoOsuFQ==",
-        "dependencies": {
-          "graphql": "graphql@16.8.1"
-        }
-      },
-      "@graphql-yoga/logger@2.0.0": {
-        "integrity": "sha512-Mg8psdkAp+YTG1OGmvU+xa6xpsAmSir0hhr3yFYPyLNwzUj95DdIwsMpKadDj9xDpYgJcH3Hp/4JMal9DhQimA==",
-        "dependencies": {
-          "tslib": "tslib@2.6.2"
-        }
-      },
-      "@graphql-yoga/plugin-response-cache@3.2.0_graphql@16.8.1_graphql-yoga@5.1.0__graphql@16.8.1": {
-        "integrity": "sha512-ebFL/HHl0Hxx+5IOZ/uFfblNU17wpvNsv+Q4/VOzxtN0kp8+T1g1QIPRD4469n8v60YdC7SWR/MqPhU3lCHFkQ==",
-        "dependencies": {
-          "@envelop/response-cache": "@envelop/response-cache@6.1.2_@envelop+core@5.0.0_graphql@16.8.1",
-          "graphql": "graphql@16.8.1",
-          "graphql-yoga": "graphql-yoga@5.1.0_graphql@16.8.1"
-        }
-      },
-      "@graphql-yoga/subscription@5.0.0": {
-        "integrity": "sha512-Ri7sK8hmxd/kwaEa0YT8uqQUb2wOLsmBMxI90QDyf96lzOMJRgBuNYoEkU1pSgsgmW2glceZ96sRYfaXqwVxUw==",
-        "dependencies": {
-          "@graphql-yoga/typed-event-target": "@graphql-yoga/typed-event-target@3.0.0",
-          "@repeaterjs/repeater": "@repeaterjs/repeater@3.0.5",
-          "@whatwg-node/events": "@whatwg-node/events@0.1.1",
-          "tslib": "tslib@2.6.2"
-        }
-      },
-      "@graphql-yoga/typed-event-target@3.0.0": {
-        "integrity": "sha512-w+liuBySifrstuHbFrHoHAEyVnDFVib+073q8AeAJ/qqJfvFvAwUPLLtNohR/WDVRgSasfXtl3dcNuVJWN+rjg==",
-        "dependencies": {
-          "@repeaterjs/repeater": "@repeaterjs/repeater@3.0.5",
-          "tslib": "tslib@2.6.2"
-        }
-      },
-      "@kamilkisiela/fast-url-parser@1.1.4": {
-        "integrity": "sha512-gbkePEBupNydxCelHCESvFSFM8XPh1Zs/OAVRW/rKpEqPAl5PbOM90Si8mv9bvnR53uPD2s/FiRxdvSejpRJew==",
-        "dependencies": {}
-      },
-      "@novu/node@0.22.0": {
-        "integrity": "sha512-uLQDnXz5Xy1Tlm4kfx1LXRHstQC95Gr1IpgT5sZFBH5EBrG5dZqzdMF6rMC6K1/U2prwgFEVmEoEgbMRSxfmoQ==",
-        "dependencies": {
-          "@novu/shared": "@novu/shared@0.22.0",
-          "axios-retry": "axios-retry@3.9.1",
-          "handlebars": "handlebars@4.7.8",
-          "lodash.get": "lodash.get@4.4.2",
-          "lodash.merge": "lodash.merge@4.6.2",
-          "uuid": "uuid@9.0.1"
-        }
-      },
-      "@novu/shared@0.22.0": {
-        "integrity": "sha512-lqP3idO1jkyXZbQR7TuPs2KpRdOJ7YUyJCiaItuiLHe0uO6iCWj3TwWAPalMJmxd05YZfXsyvaqPWYPHzy42qw==",
-        "dependencies": {
-          "axios": "axios@1.6.3",
-          "class-transformer": "class-transformer@0.5.1",
-          "class-validator": "class-validator@0.14.0"
-        }
-      },
-      "@repeaterjs/repeater@3.0.5": {
-        "integrity": "sha512-l3YHBLAol6d/IKnB9LhpD0cEZWAoe3eFKUyTYWmFmCO2Q/WOckxLQAUyMZWwZV2M/m3+4vgRoaolFqaII82/TA==",
-        "dependencies": {}
-      },
-      "@types/lodash.groupby@4.6.9": {
-        "integrity": "sha512-z2xtCX2ko7GrqORnnYea4+ksT7jZNAvaOcLd6mP9M7J09RHvJs06W8BGdQQAX8ARef09VQLdeRilSOcfHlDQJQ==",
-        "dependencies": {
-          "@types/lodash": "@types/lodash@4.14.202"
-        }
-      },
-      "@types/lodash.partition@4.6.9": {
-        "integrity": "sha512-ANgnHyTw/C07oHr/8/jzoc1BlZZFRafAyDvc04Z8qR1IvWZpAGB8aHPUkd0UCgJWOauqoCsILhvPLXKsTc4rXQ==",
-        "dependencies": {
-          "@types/lodash": "@types/lodash@4.14.202"
-        }
-      },
-      "@types/lodash@4.14.202": {
-        "integrity": "sha512-OvlIYQK9tNneDlS0VN54LLd5uiPCBOp7gS5Z0f1mjoJYBrtStzgmJBxONW3U6OZqdtNzZPmn9BS/7WI7BFFcFQ==",
-        "dependencies": {}
-      },
-      "@types/validator@13.11.7": {
-        "integrity": "sha512-q0JomTsJ2I5Mv7dhHhQLGjMvX0JJm5dyZ1DXQySIUzU1UlwzB8bt+R6+LODUbz0UDIOvEzGc28tk27gBJw2N8Q==",
-        "dependencies": {}
-      },
-      "@whatwg-node/events@0.1.1": {
-        "integrity": "sha512-AyQEn5hIPV7Ze+xFoXVU3QTHXVbWPrzaOkxtENMPMuNL6VVHrp4hHfDt9nrQpjO7BgvuM95dMtkycX5M/DZR3w==",
-        "dependencies": {}
-      },
-      "@whatwg-node/fetch@0.9.15": {
-        "integrity": "sha512-2wIUcolUthZt0nsPRj+pT7K9h/EO3t/j09IBuq0FtITCsASc2fRCmRw2JHS6hk9fzUQrz2+YYrA1ZDpV7+vLsQ==",
-        "dependencies": {
-          "@whatwg-node/node-fetch": "@whatwg-node/node-fetch@0.5.3",
-          "urlpattern-polyfill": "urlpattern-polyfill@9.0.0"
-        }
-      },
-      "@whatwg-node/node-fetch@0.5.3": {
-        "integrity": "sha512-toMC8N53RxgprcuU7Fc05KOrJhZV49njJCHPZvXBsjZMQBKrDm9o14Y56CsrUC85cvjQu862MaYOjd8rKgHdDw==",
-        "dependencies": {
-          "@kamilkisiela/fast-url-parser": "@kamilkisiela/fast-url-parser@1.1.4",
-          "@whatwg-node/events": "@whatwg-node/events@0.1.1",
-          "busboy": "busboy@1.6.0",
-          "fast-querystring": "fast-querystring@1.1.2",
-          "tslib": "tslib@2.6.2"
-        }
-      },
-      "@whatwg-node/server@0.9.23": {
-        "integrity": "sha512-B4SkvwXq0dNFQC/9r6UjMeE1MG0zxxFqSCljasgq/HYtY8Sm/blr7F2vZorIsjtz3nv/RDyrh1sM1MG7PUS6Vg==",
-        "dependencies": {
-          "@whatwg-node/fetch": "@whatwg-node/fetch@0.9.15",
-          "tslib": "tslib@2.6.2"
-        }
-      },
-      "asynckit@0.4.0": {
-        "integrity": "sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==",
-        "dependencies": {}
-      },
-      "axios-retry@3.9.1": {
-        "integrity": "sha512-8PJDLJv7qTTMMwdnbMvrLYuvB47M81wRtxQmEdV5w4rgbTXTt+vtPkXwajOfOdSyv/wZICJOC+/UhXH4aQ/R+w==",
-        "dependencies": {
-          "@babel/runtime": "@babel/runtime@7.23.7",
-          "is-retry-allowed": "is-retry-allowed@2.2.0"
-        }
-      },
-      "axios@1.6.3": {
-        "integrity": "sha512-fWyNdeawGam70jXSVlKl+SUNVcL6j6W79CuSIPfi6HnDUmSCH6gyUys/HrqHeA/wU0Az41rRgean494d0Jb+ww==",
-        "dependencies": {
-          "follow-redirects": "follow-redirects@1.15.4",
-          "form-data": "form-data@4.0.0",
-          "proxy-from-env": "proxy-from-env@1.1.0"
-        }
-      },
-      "busboy@1.6.0": {
-        "integrity": "sha512-8SFQbg/0hQ9xy3UNTB0YEnsNBbWfhf7RtnzpL7TkBiTBRfrQ9Fxcnz7VJsleJpyp6rVLvXiuORqjlHi5q+PYuA==",
-        "dependencies": {
-          "streamsearch": "streamsearch@1.1.0"
-        }
-      },
-      "class-transformer@0.5.1": {
-        "integrity": "sha512-SQa1Ws6hUbfC98vKGxZH3KFY0Y1lm5Zm0SY8XX9zbK7FJCyVEac3ATW0RIpwzW+oOfmHE5PMPufDG9hCfoEOMw==",
-        "dependencies": {}
-      },
-      "class-validator@0.14.0": {
-        "integrity": "sha512-ct3ltplN8I9fOwUd8GrP8UQixwff129BkEtuWDKL5W45cQuLd19xqmTLu5ge78YDm/fdje6FMt0hGOhl0lii3A==",
-        "dependencies": {
-          "@types/validator": "@types/validator@13.11.7",
-          "libphonenumber-js": "libphonenumber-js@1.10.53",
-          "validator": "validator@13.11.0"
-        }
-      },
-      "combined-stream@1.0.8": {
-        "integrity": "sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==",
-        "dependencies": {
-          "delayed-stream": "delayed-stream@1.0.0"
-        }
-      },
-      "cross-inspect@1.0.0": {
-        "integrity": "sha512-4PFfn4b5ZN6FMNGSZlyb7wUhuN8wvj8t/VQHZdM4JsDcruGJ8L2kf9zao98QIrBPFCpdk27qst/AGTl7pL3ypQ==",
-        "dependencies": {
-          "tslib": "tslib@2.6.2"
-        }
-      },
-      "delayed-stream@1.0.0": {
-        "integrity": "sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==",
-        "dependencies": {}
-      },
-      "dset@3.1.3": {
-        "integrity": "sha512-20TuZZHCEZ2O71q9/+8BwKwZ0QtD9D8ObhrihJPr+vLLYlSuAU3/zL4cSlgbfeoGHTjCSJBa7NGcrF9/Bx/WJQ==",
-        "dependencies": {}
-      },
-      "fast-decode-uri-component@1.0.1": {
-        "integrity": "sha512-WKgKWg5eUxvRZGwW8FvfbaH7AXSh2cL+3j5fMGzUMCxWBJ3dV3a7Wz8y2f/uQ0e3B6WmodD3oS54jTQ9HVTIIg==",
-        "dependencies": {}
-      },
-      "fast-json-stable-stringify@2.1.0": {
-        "integrity": "sha512-lhd/wF+Lk98HZoTCtlVraHtfh5XYijIjalXck7saUtuanSDyLMxnHhSXEDJqHxD7msR8D0uCmqlkwjCV8xvwHw==",
-        "dependencies": {}
-      },
-      "fast-querystring@1.1.2": {
-        "integrity": "sha512-g6KuKWmFXc0fID8WWH0jit4g0AGBoJhCkJMb1RmbsSEUNvQ+ZC8D6CUZ+GtF8nMzSPXnhiePyyqqipzNNEnHjg==",
-        "dependencies": {
-          "fast-decode-uri-component": "fast-decode-uri-component@1.0.1"
-        }
-      },
-      "follow-redirects@1.15.4": {
-        "integrity": "sha512-Cr4D/5wlrb0z9dgERpUL3LrmPKVDsETIJhaCMeDfuFYcqa5bldGV6wBsAN6X/vxlXQtFBMrXdXxdL8CbDTGniw==",
-        "dependencies": {}
-      },
-      "form-data@4.0.0": {
-        "integrity": "sha512-ETEklSGi5t0QMZuiXoA/Q6vcnxcLQP5vdugSpuAyi6SVGi2clPPp+xgEhuMaHC+zGgn31Kd235W35f7Hykkaww==",
-        "dependencies": {
-          "asynckit": "asynckit@0.4.0",
-          "combined-stream": "combined-stream@1.0.8",
-          "mime-types": "mime-types@2.1.35"
-        }
-      },
-      "graphql-yoga@5.1.0_graphql@16.8.1": {
-        "integrity": "sha512-Ee5uJkNSI7ZRS8X79OlPEuF8m2+HCn/dmjvbMNpsz5Yq+sqsLXTEFhKjhjK6hyqrTl1pQwGwJTbl9f886hDMDg==",
-        "dependencies": {
-          "@envelop/core": "@envelop/core@5.0.0",
-          "@graphql-tools/executor": "@graphql-tools/executor@1.2.0_graphql@16.8.1",
-          "@graphql-tools/schema": "@graphql-tools/schema@10.0.2_graphql@16.8.1",
-          "@graphql-tools/utils": "@graphql-tools/utils@10.0.12_graphql@16.8.1",
-          "@graphql-yoga/logger": "@graphql-yoga/logger@2.0.0",
-          "@graphql-yoga/subscription": "@graphql-yoga/subscription@5.0.0",
-          "@whatwg-node/fetch": "@whatwg-node/fetch@0.9.15",
-          "@whatwg-node/server": "@whatwg-node/server@0.9.23",
-          "dset": "dset@3.1.3",
-          "graphql": "graphql@16.8.1",
-          "lru-cache": "lru-cache@10.1.0",
-          "tslib": "tslib@2.6.2"
-        }
-      },
-      "graphql@16.8.1": {
-        "integrity": "sha512-59LZHPdGZVh695Ud9lRzPBVTtlX9ZCV150Er2W43ro37wVof0ctenSaskPPjN7lVTIN8mSZt8PHUNKZuNQUuxw==",
-        "dependencies": {}
-      },
-      "handlebars@4.7.8": {
-        "integrity": "sha512-vafaFqs8MZkRrSX7sFVUdo3ap/eNiLnb4IakshzvP56X5Nr1iGKAIqdX6tMlm6HcNRIkr6AxO5jFEoJzzpT8aQ==",
-        "dependencies": {
-          "minimist": "minimist@1.2.8",
-          "neo-async": "neo-async@2.6.2",
-          "source-map": "source-map@0.6.1",
-          "uglify-js": "uglify-js@3.17.4",
-          "wordwrap": "wordwrap@1.0.0"
-        }
-      },
-      "is-retry-allowed@2.2.0": {
-        "integrity": "sha512-XVm7LOeLpTW4jV19QSH38vkswxoLud8sQ57YwJVTPWdiaI9I8keEhGFpBlslyVsgdQy4Opg8QOLb8YRgsyZiQg==",
-        "dependencies": {}
-      },
-      "libphonenumber-js@1.10.53": {
-        "integrity": "sha512-sDTnnqlWK4vH4AlDQuswz3n4Hx7bIQWTpIcScJX+Sp7St3LXHmfiax/ZFfyYxHmkdCvydOLSuvtAO/XpXiSySw==",
-        "dependencies": {}
-      },
-      "lodash.get@4.4.2": {
-        "integrity": "sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==",
-        "dependencies": {}
-      },
-      "lodash.groupby@4.6.0": {
-        "integrity": "sha512-5dcWxm23+VAoz+awKmBaiBvzox8+RqMgFhi7UvX9DHZr2HdxHXM/Wrf8cfKpsW37RNrvtPn6hSwNqurSILbmJw==",
-        "dependencies": {}
-      },
-      "lodash.merge@4.6.2": {
-        "integrity": "sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==",
-        "dependencies": {}
-      },
-      "lodash.partition@4.6.0": {
-        "integrity": "sha512-35L3dSF3Q6V1w5j6V3NhNlQjzsRDC/pYKCTdYTmwqSib+Q8ponkAmt/PwEOq3EmI38DSCl+SkIVwLd+uSlVdrg==",
-        "dependencies": {}
-      },
-      "lru-cache@10.1.0": {
-        "integrity": "sha512-/1clY/ui8CzjKFyjdvwPWJUYKiFVXG2I2cY0ssG7h4+hwk+XOIX7ZSG9Q7TW8TW3Kp3BUSqgFWBLgL4PJ+Blag==",
-        "dependencies": {}
-      },
-      "mime-db@1.52.0": {
-        "integrity": "sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg==",
-        "dependencies": {}
-      },
-      "mime-types@2.1.35": {
-        "integrity": "sha512-ZDY+bPm5zTTF+YpCrAU9nK0UgICYPT0QtT1NZWFv4s++TNkcgVaT0g6+4R2uI4MjQjzysHB1zxuWL50hzaeXiw==",
-        "dependencies": {
-          "mime-db": "mime-db@1.52.0"
-        }
-      },
-      "minimist@1.2.8": {
-        "integrity": "sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==",
-        "dependencies": {}
-      },
-      "neo-async@2.6.2": {
-        "integrity": "sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==",
-        "dependencies": {}
-      },
-      "proxy-from-env@1.1.0": {
-        "integrity": "sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==",
-        "dependencies": {}
-      },
-      "regenerator-runtime@0.14.1": {
-        "integrity": "sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==",
-        "dependencies": {}
-      },
-      "source-map@0.6.1": {
-        "integrity": "sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==",
-        "dependencies": {}
-      },
-      "streamsearch@1.1.0": {
-        "integrity": "sha512-Mcc5wHehp9aXz1ax6bZUyY5afg9u2rv5cqQI3mRrYkGC8rW2hM02jWuwjtL++LS5qinSyhj2QfLyNsuc+VsExg==",
-        "dependencies": {}
-      },
-      "tslib@2.6.2": {
-        "integrity": "sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==",
-        "dependencies": {}
-      },
-      "uglify-js@3.17.4": {
-        "integrity": "sha512-T9q82TJI9e/C1TAxYvfb16xO120tMVFZrGA3f9/P4424DNu6ypK103y0GPFVa17yotwSyZW5iYXgjYHkGrJW/g==",
-        "dependencies": {}
-      },
-      "urlpattern-polyfill@9.0.0": {
-        "integrity": "sha512-WHN8KDQblxd32odxeIgo83rdVDE2bvdkb86it7bMhYZwWKJz0+O0RK/eZiHYnM+zgt/U7hAHOlCQGfjjvSkw2g==",
-        "dependencies": {}
-      },
-      "uuid@9.0.1": {
-        "integrity": "sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==",
-        "dependencies": {}
-      },
-      "validator@13.11.0": {
-        "integrity": "sha512-Ii+sehpSfZy+At5nPdnyMhx78fEoPDkR2XW/zimHEL3MyGJQOCQ7WeP20jPYRz7ZCpcKLB21NxuXHF3bxjStBQ==",
-        "dependencies": {}
-      },
-      "value-or-promise@1.0.12": {
-        "integrity": "sha512-Z6Uz+TYwEqE7ZN50gwn+1LCVo9ZVrpxRPOhOLnncYkY1ZzOYtrX8Fwf/rFktZ8R5mJms6EZf5TqNOMeZmnPq9Q==",
-        "dependencies": {}
-      },
-      "wordwrap@1.0.0": {
-        "integrity": "sha512-gvVzJFlPycKc5dZN4yPkP8w7Dc37BtP1yczEneOb4uq34pXZcvrtRTmWV8W+Ume+XCxKgbjM+nevkyFPMybd4Q==",
-        "dependencies": {}
-      }
+    "@envelop/core@5.0.0": {
+      "integrity": "sha512-aJdnH/ptv+cvwfvciCBe7TSvccBwo9g0S5f6u35TBVzRVqIGkK03lFlIL+x1cnfZgN9EfR2b1PH2galrT1CdCQ==",
+      "dependencies": [
+        "@envelop/types",
+        "tslib"
+      ]
+    },
+    "@envelop/response-cache@6.1.2_@envelop+core@5.0.0_graphql@16.8.1": {
+      "integrity": "sha512-vBX6z/TxBZSNReVn69VJVkdGHpGzHyeQNMz9LXobczl55KCZaf2inBWguSdGq+vx6PlB068GhLeg+a7kseiF1Q==",
+      "dependencies": [
+        "@envelop/core",
+        "@graphql-tools/utils",
+        "@whatwg-node/fetch",
+        "fast-json-stable-stringify",
+        "graphql",
+        "lru-cache",
+        "tslib"
+      ]
+    },
+    "@envelop/types@5.0.0": {
+      "integrity": "sha512-IPjmgSc4KpQRlO4qbEDnBEixvtb06WDmjKfi/7fkZaryh5HuOmTtixe1EupQI5XfXO8joc3d27uUZ0QdC++euA==",
+      "dependencies": [
+        "tslib"
+      ]
+    },
+    "@graphql-tools/executor@1.2.0_graphql@16.8.1": {
+      "integrity": "sha512-SKlIcMA71Dha5JnEWlw4XxcaJ+YupuXg0QCZgl2TOLFz4SkGCwU/geAsJvUJFwK2RbVLpQv/UMq67lOaBuwDtg==",
+      "dependencies": [
+        "@graphql-tools/utils",
+        "@graphql-typed-document-node/core",
+        "@repeaterjs/repeater",
+        "graphql",
+        "tslib",
+        "value-or-promise"
+      ]
+    },
+    "@graphql-tools/merge@9.0.1_graphql@16.8.1": {
+      "integrity": "sha512-hIEExWO9fjA6vzsVjJ3s0cCQ+Q/BEeMVJZtMXd7nbaVefVy0YDyYlEkeoYYNV3NVVvu1G9lr6DM1Qd0DGo9Caw==",
+      "dependencies": [
+        "@graphql-tools/utils",
+        "graphql",
+        "tslib"
+      ]
+    },
+    "@graphql-tools/schema@10.0.2_graphql@16.8.1": {
+      "integrity": "sha512-TbPsIZnWyDCLhgPGnDjt4hosiNU2mF/rNtSk5BVaXWnZqvKJ6gzJV4fcHcvhRIwtscDMW2/YTnK6dLVnk8pc4w==",
+      "dependencies": [
+        "@graphql-tools/merge",
+        "@graphql-tools/utils",
+        "graphql",
+        "tslib",
+        "value-or-promise"
+      ]
+    },
+    "@graphql-tools/utils@10.0.12_graphql@16.8.1": {
+      "integrity": "sha512-+yS1qlFwXlwU3Gv8ek/h2aJ95quog4yF22haC11M0zReMSTddbGJZ5yXKkE3sXoY2BcL1utilSFjylJ9uXpSNQ==",
+      "dependencies": [
+        "@graphql-typed-document-node/core",
+        "cross-inspect",
+        "dset",
+        "graphql",
+        "tslib"
+      ]
+    },
+    "@graphql-typed-document-node/core@3.2.0_graphql@16.8.1": {
+      "integrity": "sha512-mB9oAsNCm9aM3/SOv4YtBMqZbYj10R7dkq8byBqxGY/ncFwhf2oQzMV+LCRlWoDSEBJ3COiR1yeDvMtsoOsuFQ==",
+      "dependencies": [
+        "graphql"
+      ]
+    },
+    "@graphql-yoga/logger@2.0.0": {
+      "integrity": "sha512-Mg8psdkAp+YTG1OGmvU+xa6xpsAmSir0hhr3yFYPyLNwzUj95DdIwsMpKadDj9xDpYgJcH3Hp/4JMal9DhQimA==",
+      "dependencies": [
+        "tslib"
+      ]
+    },
+    "@graphql-yoga/plugin-response-cache@3.2.0_graphql@16.8.1_graphql-yoga@5.1.0__graphql@16.8.1": {
+      "integrity": "sha512-ebFL/HHl0Hxx+5IOZ/uFfblNU17wpvNsv+Q4/VOzxtN0kp8+T1g1QIPRD4469n8v60YdC7SWR/MqPhU3lCHFkQ==",
+      "dependencies": [
+        "@envelop/response-cache",
+        "graphql",
+        "graphql-yoga"
+      ]
+    },
+    "@graphql-yoga/subscription@5.0.0": {
+      "integrity": "sha512-Ri7sK8hmxd/kwaEa0YT8uqQUb2wOLsmBMxI90QDyf96lzOMJRgBuNYoEkU1pSgsgmW2glceZ96sRYfaXqwVxUw==",
+      "dependencies": [
+        "@graphql-yoga/typed-event-target",
+        "@repeaterjs/repeater",
+        "@whatwg-node/events",
+        "tslib"
+      ]
+    },
+    "@graphql-yoga/typed-event-target@3.0.0": {
+      "integrity": "sha512-w+liuBySifrstuHbFrHoHAEyVnDFVib+073q8AeAJ/qqJfvFvAwUPLLtNohR/WDVRgSasfXtl3dcNuVJWN+rjg==",
+      "dependencies": [
+        "@repeaterjs/repeater",
+        "tslib"
+      ]
+    },
+    "@kamilkisiela/fast-url-parser@1.1.4": {
+      "integrity": "sha512-gbkePEBupNydxCelHCESvFSFM8XPh1Zs/OAVRW/rKpEqPAl5PbOM90Si8mv9bvnR53uPD2s/FiRxdvSejpRJew=="
+    },
+    "@novu/node@0.22.0": {
+      "integrity": "sha512-uLQDnXz5Xy1Tlm4kfx1LXRHstQC95Gr1IpgT5sZFBH5EBrG5dZqzdMF6rMC6K1/U2prwgFEVmEoEgbMRSxfmoQ==",
+      "dependencies": [
+        "@novu/shared",
+        "axios-retry",
+        "handlebars",
+        "lodash.get",
+        "lodash.merge",
+        "uuid"
+      ],
+      "deprecated": true
+    },
+    "@novu/shared@0.22.0": {
+      "integrity": "sha512-lqP3idO1jkyXZbQR7TuPs2KpRdOJ7YUyJCiaItuiLHe0uO6iCWj3TwWAPalMJmxd05YZfXsyvaqPWYPHzy42qw==",
+      "dependencies": [
+        "axios",
+        "class-transformer",
+        "class-validator"
+      ]
+    },
+    "@repeaterjs/repeater@3.0.5": {
+      "integrity": "sha512-l3YHBLAol6d/IKnB9LhpD0cEZWAoe3eFKUyTYWmFmCO2Q/WOckxLQAUyMZWwZV2M/m3+4vgRoaolFqaII82/TA=="
+    },
+    "@types/lodash.groupby@4.6.9": {
+      "integrity": "sha512-z2xtCX2ko7GrqORnnYea4+ksT7jZNAvaOcLd6mP9M7J09RHvJs06W8BGdQQAX8ARef09VQLdeRilSOcfHlDQJQ==",
+      "dependencies": [
+        "@types/lodash"
+      ]
+    },
+    "@types/lodash.partition@4.6.9": {
+      "integrity": "sha512-ANgnHyTw/C07oHr/8/jzoc1BlZZFRafAyDvc04Z8qR1IvWZpAGB8aHPUkd0UCgJWOauqoCsILhvPLXKsTc4rXQ==",
+      "dependencies": [
+        "@types/lodash"
+      ]
+    },
+    "@types/lodash@4.14.202": {
+      "integrity": "sha512-OvlIYQK9tNneDlS0VN54LLd5uiPCBOp7gS5Z0f1mjoJYBrtStzgmJBxONW3U6OZqdtNzZPmn9BS/7WI7BFFcFQ=="
+    },
+    "@types/validator@13.11.7": {
+      "integrity": "sha512-q0JomTsJ2I5Mv7dhHhQLGjMvX0JJm5dyZ1DXQySIUzU1UlwzB8bt+R6+LODUbz0UDIOvEzGc28tk27gBJw2N8Q=="
+    },
+    "@whatwg-node/events@0.1.1": {
+      "integrity": "sha512-AyQEn5hIPV7Ze+xFoXVU3QTHXVbWPrzaOkxtENMPMuNL6VVHrp4hHfDt9nrQpjO7BgvuM95dMtkycX5M/DZR3w=="
+    },
+    "@whatwg-node/fetch@0.9.15": {
+      "integrity": "sha512-2wIUcolUthZt0nsPRj+pT7K9h/EO3t/j09IBuq0FtITCsASc2fRCmRw2JHS6hk9fzUQrz2+YYrA1ZDpV7+vLsQ==",
+      "dependencies": [
+        "@whatwg-node/node-fetch",
+        "urlpattern-polyfill"
+      ]
+    },
+    "@whatwg-node/node-fetch@0.5.3": {
+      "integrity": "sha512-toMC8N53RxgprcuU7Fc05KOrJhZV49njJCHPZvXBsjZMQBKrDm9o14Y56CsrUC85cvjQu862MaYOjd8rKgHdDw==",
+      "dependencies": [
+        "@kamilkisiela/fast-url-parser",
+        "@whatwg-node/events",
+        "busboy",
+        "fast-querystring",
+        "tslib"
+      ]
+    },
+    "@whatwg-node/server@0.9.23": {
+      "integrity": "sha512-B4SkvwXq0dNFQC/9r6UjMeE1MG0zxxFqSCljasgq/HYtY8Sm/blr7F2vZorIsjtz3nv/RDyrh1sM1MG7PUS6Vg==",
+      "dependencies": [
+        "@whatwg-node/fetch",
+        "tslib"
+      ]
+    },
+    "asynckit@0.4.0": {
+      "integrity": "sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q=="
+    },
+    "axios-retry@3.9.1": {
+      "integrity": "sha512-8PJDLJv7qTTMMwdnbMvrLYuvB47M81wRtxQmEdV5w4rgbTXTt+vtPkXwajOfOdSyv/wZICJOC+/UhXH4aQ/R+w==",
+      "dependencies": [
+        "@babel/runtime",
+        "is-retry-allowed"
+      ]
+    },
+    "axios@1.6.3": {
+      "integrity": "sha512-fWyNdeawGam70jXSVlKl+SUNVcL6j6W79CuSIPfi6HnDUmSCH6gyUys/HrqHeA/wU0Az41rRgean494d0Jb+ww==",
+      "dependencies": [
+        "follow-redirects",
+        "form-data",
+        "proxy-from-env"
+      ]
+    },
+    "busboy@1.6.0": {
+      "integrity": "sha512-8SFQbg/0hQ9xy3UNTB0YEnsNBbWfhf7RtnzpL7TkBiTBRfrQ9Fxcnz7VJsleJpyp6rVLvXiuORqjlHi5q+PYuA==",
+      "dependencies": [
+        "streamsearch"
+      ]
+    },
+    "class-transformer@0.5.1": {
+      "integrity": "sha512-SQa1Ws6hUbfC98vKGxZH3KFY0Y1lm5Zm0SY8XX9zbK7FJCyVEac3ATW0RIpwzW+oOfmHE5PMPufDG9hCfoEOMw=="
+    },
+    "class-validator@0.14.0": {
+      "integrity": "sha512-ct3ltplN8I9fOwUd8GrP8UQixwff129BkEtuWDKL5W45cQuLd19xqmTLu5ge78YDm/fdje6FMt0hGOhl0lii3A==",
+      "dependencies": [
+        "@types/validator",
+        "libphonenumber-js",
+        "validator"
+      ]
+    },
+    "combined-stream@1.0.8": {
+      "integrity": "sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==",
+      "dependencies": [
+        "delayed-stream"
+      ]
+    },
+    "cross-inspect@1.0.0": {
+      "integrity": "sha512-4PFfn4b5ZN6FMNGSZlyb7wUhuN8wvj8t/VQHZdM4JsDcruGJ8L2kf9zao98QIrBPFCpdk27qst/AGTl7pL3ypQ==",
+      "dependencies": [
+        "tslib"
+      ]
+    },
+    "delayed-stream@1.0.0": {
+      "integrity": "sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ=="
+    },
+    "dset@3.1.3": {
+      "integrity": "sha512-20TuZZHCEZ2O71q9/+8BwKwZ0QtD9D8ObhrihJPr+vLLYlSuAU3/zL4cSlgbfeoGHTjCSJBa7NGcrF9/Bx/WJQ=="
+    },
+    "fast-decode-uri-component@1.0.1": {
+      "integrity": "sha512-WKgKWg5eUxvRZGwW8FvfbaH7AXSh2cL+3j5fMGzUMCxWBJ3dV3a7Wz8y2f/uQ0e3B6WmodD3oS54jTQ9HVTIIg=="
+    },
+    "fast-json-stable-stringify@2.1.0": {
+      "integrity": "sha512-lhd/wF+Lk98HZoTCtlVraHtfh5XYijIjalXck7saUtuanSDyLMxnHhSXEDJqHxD7msR8D0uCmqlkwjCV8xvwHw=="
+    },
+    "fast-querystring@1.1.2": {
+      "integrity": "sha512-g6KuKWmFXc0fID8WWH0jit4g0AGBoJhCkJMb1RmbsSEUNvQ+ZC8D6CUZ+GtF8nMzSPXnhiePyyqqipzNNEnHjg==",
+      "dependencies": [
+        "fast-decode-uri-component"
+      ]
+    },
+    "follow-redirects@1.15.4": {
+      "integrity": "sha512-Cr4D/5wlrb0z9dgERpUL3LrmPKVDsETIJhaCMeDfuFYcqa5bldGV6wBsAN6X/vxlXQtFBMrXdXxdL8CbDTGniw=="
+    },
+    "form-data@4.0.0": {
+      "integrity": "sha512-ETEklSGi5t0QMZuiXoA/Q6vcnxcLQP5vdugSpuAyi6SVGi2clPPp+xgEhuMaHC+zGgn31Kd235W35f7Hykkaww==",
+      "dependencies": [
+        "asynckit",
+        "combined-stream",
+        "mime-types"
+      ]
+    },
+    "graphql-yoga@5.1.0_graphql@16.8.1": {
+      "integrity": "sha512-Ee5uJkNSI7ZRS8X79OlPEuF8m2+HCn/dmjvbMNpsz5Yq+sqsLXTEFhKjhjK6hyqrTl1pQwGwJTbl9f886hDMDg==",
+      "dependencies": [
+        "@envelop/core",
+        "@graphql-tools/executor",
+        "@graphql-tools/schema",
+        "@graphql-tools/utils",
+        "@graphql-yoga/logger",
+        "@graphql-yoga/subscription",
+        "@whatwg-node/fetch",
+        "@whatwg-node/server",
+        "dset",
+        "graphql",
+        "lru-cache",
+        "tslib"
+      ]
+    },
+    "graphql@16.8.1": {
+      "integrity": "sha512-59LZHPdGZVh695Ud9lRzPBVTtlX9ZCV150Er2W43ro37wVof0ctenSaskPPjN7lVTIN8mSZt8PHUNKZuNQUuxw=="
+    },
+    "handlebars@4.7.8": {
+      "integrity": "sha512-vafaFqs8MZkRrSX7sFVUdo3ap/eNiLnb4IakshzvP56X5Nr1iGKAIqdX6tMlm6HcNRIkr6AxO5jFEoJzzpT8aQ==",
+      "dependencies": [
+        "minimist",
+        "neo-async",
+        "source-map",
+        "wordwrap"
+      ],
+      "optionalDependencies": [
+        "uglify-js"
+      ],
+      "bin": true
+    },
+    "is-retry-allowed@2.2.0": {
+      "integrity": "sha512-XVm7LOeLpTW4jV19QSH38vkswxoLud8sQ57YwJVTPWdiaI9I8keEhGFpBlslyVsgdQy4Opg8QOLb8YRgsyZiQg=="
+    },
+    "libphonenumber-js@1.10.53": {
+      "integrity": "sha512-sDTnnqlWK4vH4AlDQuswz3n4Hx7bIQWTpIcScJX+Sp7St3LXHmfiax/ZFfyYxHmkdCvydOLSuvtAO/XpXiSySw=="
+    },
+    "lodash.get@4.4.2": {
+      "integrity": "sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==",
+      "deprecated": true
+    },
+    "lodash.groupby@4.6.0": {
+      "integrity": "sha512-5dcWxm23+VAoz+awKmBaiBvzox8+RqMgFhi7UvX9DHZr2HdxHXM/Wrf8cfKpsW37RNrvtPn6hSwNqurSILbmJw=="
+    },
+    "lodash.merge@4.6.2": {
+      "integrity": "sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ=="
+    },
+    "lodash.partition@4.6.0": {
+      "integrity": "sha512-35L3dSF3Q6V1w5j6V3NhNlQjzsRDC/pYKCTdYTmwqSib+Q8ponkAmt/PwEOq3EmI38DSCl+SkIVwLd+uSlVdrg=="
+    },
+    "lru-cache@10.1.0": {
+      "integrity": "sha512-/1clY/ui8CzjKFyjdvwPWJUYKiFVXG2I2cY0ssG7h4+hwk+XOIX7ZSG9Q7TW8TW3Kp3BUSqgFWBLgL4PJ+Blag=="
+    },
+    "mime-db@1.52.0": {
+      "integrity": "sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg=="
+    },
+    "mime-types@2.1.35": {
+      "integrity": "sha512-ZDY+bPm5zTTF+YpCrAU9nK0UgICYPT0QtT1NZWFv4s++TNkcgVaT0g6+4R2uI4MjQjzysHB1zxuWL50hzaeXiw==",
+      "dependencies": [
+        "mime-db"
+      ]
+    },
+    "minimist@1.2.8": {
+      "integrity": "sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA=="
+    },
+    "neo-async@2.6.2": {
+      "integrity": "sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw=="
+    },
+    "proxy-from-env@1.1.0": {
+      "integrity": "sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg=="
+    },
+    "regenerator-runtime@0.14.1": {
+      "integrity": "sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw=="
+    },
+    "source-map@0.6.1": {
+      "integrity": "sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g=="
+    },
+    "streamsearch@1.1.0": {
+      "integrity": "sha512-Mcc5wHehp9aXz1ax6bZUyY5afg9u2rv5cqQI3mRrYkGC8rW2hM02jWuwjtL++LS5qinSyhj2QfLyNsuc+VsExg=="
+    },
+    "tslib@2.6.2": {
+      "integrity": "sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q=="
+    },
+    "uglify-js@3.17.4": {
+      "integrity": "sha512-T9q82TJI9e/C1TAxYvfb16xO120tMVFZrGA3f9/P4424DNu6ypK103y0GPFVa17yotwSyZW5iYXgjYHkGrJW/g==",
+      "bin": true
+    },
+    "urlpattern-polyfill@9.0.0": {
+      "integrity": "sha512-WHN8KDQblxd32odxeIgo83rdVDE2bvdkb86it7bMhYZwWKJz0+O0RK/eZiHYnM+zgt/U7hAHOlCQGfjjvSkw2g=="
+    },
+    "uuid@9.0.1": {
+      "integrity": "sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==",
+      "bin": true
+    },
+    "validator@13.11.0": {
+      "integrity": "sha512-Ii+sehpSfZy+At5nPdnyMhx78fEoPDkR2XW/zimHEL3MyGJQOCQ7WeP20jPYRz7ZCpcKLB21NxuXHF3bxjStBQ=="
+    },
+    "value-or-promise@1.0.12": {
+      "integrity": "sha512-Z6Uz+TYwEqE7ZN50gwn+1LCVo9ZVrpxRPOhOLnncYkY1ZzOYtrX8Fwf/rFktZ8R5mJms6EZf5TqNOMeZmnPq9Q=="
+    },
+    "wordwrap@1.0.0": {
+      "integrity": "sha512-gvVzJFlPycKc5dZN4yPkP8w7Dc37BtP1yczEneOb4uq34pXZcvrtRTmWV8W+Ume+XCxKgbjM+nevkyFPMybd4Q=="
     }
   },
   "remote": {
@@ -440,5 +411,11 @@
     "https://deno.land/x/html_parser@v0.1.3/src/utils/querying.ts": "b8efd0fbbcc38c386633ce6233d91508f3f35115ac3930eb71063e2576429eb3",
     "https://deno.land/x/html_parser@v0.1.3/src/utils/stringify.ts": "df98808214552b40b12fe00d833431ef5ae22a4842c3af1373c33d611ffc4e24",
     "https://deno.land/x/html_parser@v0.1.3/src/utils/traversal.ts": "84988442d00f83728d87d6e462113ad5107f002e32e08d88a99c7284e0252d60"
+  },
+  "workspace": {
+    "dependencies": [
+      "npm:lodash.groupby@4.6.0",
+      "npm:lodash.partition@4.6.0"
+    ]
   }
 }
